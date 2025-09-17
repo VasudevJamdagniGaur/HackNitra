@@ -1,0 +1,386 @@
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+  Alert,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+const StudentSignup = ({ onBack, onComplete }) => {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: '',
+    college: '',
+    email: '',
+    course: '',
+    class: '',
+    year: '',
+  });
+
+  const courses = ['B.Tech', 'BE'];
+  const classes = ['A', 'B', 'C', 'D'];
+  const years = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+
+  const handleNext = () => {
+    if (step === 1) {
+      if (!formData.name || !formData.college || !formData.email) {
+        Alert.alert('Error', 'Please fill in all fields');
+        return;
+      }
+      if (!formData.email.includes('@') || !formData.email.includes('.')) {
+        Alert.alert('Error', 'Please enter a valid email address');
+        return;
+      }
+      setStep(2);
+    } else if (step === 2) {
+      if (!formData.course) {
+        Alert.alert('Error', 'Please select a course');
+        return;
+      }
+      setStep(3);
+    } else if (step === 3) {
+      if (!formData.class || !formData.year) {
+        Alert.alert('Error', 'Please select both class and year');
+        return;
+      }
+      onComplete();
+    }
+  };
+
+  const handleBack = () => {
+    if (step === 1) {
+      onBack();
+    } else {
+      setStep(step - 1);
+    }
+  };
+
+  const updateFormData = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const renderStep1 = () => (
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>Personal Information</Text>
+      <Text style={styles.stepSubtitle}>Tell us about yourself</Text>
+
+      <View style={styles.inputContainer}>
+        <Ionicons name="person" size={20} color="rgba(255, 255, 255, 0.7)" style={styles.inputIcon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Full Name"
+          placeholderTextColor="rgba(255, 255, 255, 0.5)"
+          value={formData.name}
+          onChangeText={(value) => updateFormData('name', value)}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Ionicons name="school" size={20} color="rgba(255, 255, 255, 0.7)" style={styles.inputIcon} />
+        <TextInput
+          style={styles.input}
+          placeholder="College Name"
+          placeholderTextColor="rgba(255, 255, 255, 0.5)"
+          value={formData.college}
+          onChangeText={(value) => updateFormData('college', value)}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Ionicons name="mail" size={20} color="rgba(255, 255, 255, 0.7)" style={styles.inputIcon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Email ID"
+          placeholderTextColor="rgba(255, 255, 255, 0.5)"
+          value={formData.email}
+          onChangeText={(value) => updateFormData('email', value)}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+      </View>
+    </View>
+  );
+
+  const renderStep2 = () => (
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>Course Selection</Text>
+      <Text style={styles.stepSubtitle}>Choose your course</Text>
+
+      <View style={styles.optionsContainer}>
+        {courses.map((course) => (
+          <TouchableOpacity
+            key={course}
+            style={[
+              styles.optionCard,
+              formData.course === course && styles.selectedOptionCard,
+            ]}
+            onPress={() => updateFormData('course', course)}
+          >
+            <Text style={[
+              styles.optionText,
+              formData.course === course && styles.selectedOptionText,
+            ]}>
+              {course}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
+  );
+
+  const renderStep3 = () => (
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>Class & Year</Text>
+      <Text style={styles.stepSubtitle}>Select your class and year</Text>
+
+      <View style={styles.selectionContainer}>
+        <Text style={styles.selectionLabel}>Class</Text>
+        <View style={styles.optionsRow}>
+          {classes.map((classItem) => (
+            <TouchableOpacity
+              key={classItem}
+              style={[
+                styles.optionButton,
+                formData.class === classItem && styles.selectedOptionButton,
+              ]}
+              onPress={() => updateFormData('class', classItem)}
+            >
+              <Text style={[
+                styles.optionButtonText,
+                formData.class === classItem && styles.selectedOptionButtonText,
+              ]}>
+                {classItem}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+
+      <View style={styles.selectionContainer}>
+        <Text style={styles.selectionLabel}>Year</Text>
+        <View style={styles.optionsRow}>
+          {years.map((year) => (
+            <TouchableOpacity
+              key={year}
+              style={[
+                styles.optionButton,
+                formData.year === year && styles.selectedOptionButton,
+              ]}
+              onPress={() => updateFormData('year', year)}
+            >
+              <Text style={[
+                styles.optionButtonText,
+                formData.year === year && styles.selectedOptionButtonText,
+              ]}>
+                {year}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+          <Ionicons name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Student Registration</Text>
+        <View style={styles.placeholder} />
+      </View>
+
+      {/* Progress Indicator */}
+      <View style={styles.progressContainer}>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(step / 3) * 100}%` }]} />
+        </View>
+        <Text style={styles.progressText}>Step {step} of 3</Text>
+      </View>
+
+      {/* Content */}
+      <ScrollView style={styles.content}>
+        {step === 1 && renderStep1()}
+        {step === 2 && renderStep2()}
+        {step === 3 && renderStep3()}
+      </ScrollView>
+
+      {/* Footer */}
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
+          <Text style={styles.nextButtonText}>
+            {step === 3 ? 'Complete Registration' : 'Next'}
+          </Text>
+          <Ionicons name="arrow-forward" size={20} color="#fff" />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1a1a2e',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingTop: 60,
+    paddingBottom: 20,
+  },
+  backButton: {
+    padding: 10,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  placeholder: {
+    width: 44,
+  },
+  progressContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  progressBar: {
+    height: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 2,
+    marginBottom: 10,
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: '#4CAF50',
+    borderRadius: 2,
+  },
+  progressText: {
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.7)',
+    textAlign: 'center',
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  stepContainer: {
+    paddingVertical: 20,
+  },
+  stepTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 8,
+  },
+  stepSubtitle: {
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.7)',
+    marginBottom: 30,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 12,
+    marginBottom: 20,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+  },
+  inputIcon: {
+    marginRight: 12,
+  },
+  input: {
+    flex: 1,
+    paddingVertical: 15,
+    fontSize: 16,
+    color: '#fff',
+  },
+  optionsContainer: {
+    gap: 15,
+  },
+  optionCard: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 12,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    alignItems: 'center',
+  },
+  selectedOptionCard: {
+    backgroundColor: 'rgba(46, 204, 113, 0.2)',
+    borderColor: '#4CAF50',
+  },
+  optionText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  selectedOptionText: {
+    color: '#4CAF50',
+  },
+  selectionContainer: {
+    marginBottom: 30,
+  },
+  selectionLabel: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 15,
+  },
+  optionsRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+  },
+  optionButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    minWidth: 80,
+    alignItems: 'center',
+  },
+  selectedOptionButton: {
+    backgroundColor: '#4CAF50',
+    borderColor: '#4CAF50',
+  },
+  optionButtonText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  selectedOptionButtonText: {
+    color: '#fff',
+  },
+  footer: {
+    padding: 20,
+  },
+  nextButton: {
+    backgroundColor: '#4CAF50',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 15,
+    borderRadius: 12,
+  },
+  nextButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginRight: 8,
+  },
+});
+
+export default StudentSignup;
