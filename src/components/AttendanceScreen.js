@@ -69,15 +69,34 @@ const AttendanceScreen = ({ onBack, onMenuPress }) => {
   };
 
 
-  const renderCircularChart = (percentage) => (
-    <View style={styles.chartContainer}>
-      <View style={[styles.chartCircle, { borderColor: getPercentageColor(percentage) }]}>
-        <Text style={[styles.chartText, { color: getPercentageColor(percentage) }]}>
-          {percentage}%
-        </Text>
+  const renderCircularChart = (percentage) => {
+    const presentAngle = (percentage / 100) * 360;
+    const absentAngle = 360 - presentAngle;
+    
+    return (
+      <View style={styles.chartContainer}>
+        <View style={styles.donutChart}>
+          <View style={styles.donutBackground}>
+            {/* Background circle (red for absent) */}
+            <View style={styles.donutBackgroundCircle} />
+            {/* Present portion (green) */}
+            <View style={[
+              styles.donutPresent, 
+              { 
+                transform: [{ rotate: `${presentAngle}deg` }],
+              }
+            ]} />
+            {/* Inner circle with percentage text */}
+            <View style={styles.donutInner}>
+              <Text style={[styles.chartText, { color: getPercentageColor(percentage) }]}>
+                {percentage}%
+              </Text>
+            </View>
+          </View>
+        </View>
       </View>
-    </View>
-  );
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -100,10 +119,6 @@ const AttendanceScreen = ({ onBack, onMenuPress }) => {
           <Text style={styles.sectionTitle}>Overall Attendance</Text>
           <View style={styles.statsContainer}>
             {renderCircularChart(attendanceData.overall)}
-            <View style={styles.statsInfo}>
-              <Text style={styles.statsLabel}>Overall</Text>
-              <Text style={styles.statsValue}>{attendanceData.overall}%</Text>
-            </View>
           </View>
         </View>
 
@@ -236,41 +251,60 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   statsContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 15,
-    padding: 20,
+    padding: 30,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
   },
   chartContainer: {
-    marginRight: 20,
-  },
-  chartCircle: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    borderWidth: 12,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  donutChart: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  donutBackground: {
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  donutBackgroundCircle: {
+    position: 'absolute',
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    borderWidth: 16,
+    borderColor: '#F44336',
+  },
+  donutPresent: {
+    position: 'absolute',
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    borderWidth: 16,
+    borderColor: 'transparent',
+    borderTopColor: '#4CAF50',
+    transform: [{ rotate: '-90deg' }],
+  },
+  donutInner: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#1a1a2e',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1,
+  },
   chartText: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
-  },
-  statsInfo: {
-    flex: 1,
-  },
-  statsLabel: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.7)',
-    marginBottom: 5,
-  },
-  statsValue: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#4CAF50',
   },
   subjectsContainer: {
     gap: 15,
