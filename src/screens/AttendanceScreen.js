@@ -8,7 +8,6 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { PieChart } from 'react-native-chart-kit';
 import { Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -117,19 +116,12 @@ export default function AttendanceScreen({ navigation }) {
           <Text style={styles.sectionTitle}>Overall Attendance</Text>
           
           <View style={styles.chartContainer}>
-            <PieChart
-              data={attendanceData}
-              width={width - 80}
-              height={220}
-              chartConfig={{
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              }}
-              accessor="population"
-              backgroundColor="transparent"
-              paddingLeft="15"
-              center={[10, 0]}
-              absolute
-            />
+            <View style={styles.simpleChart}>
+              <View style={styles.chartCircle}>
+                <Text style={styles.chartPercentage}>{overallPercentage}%</Text>
+                <Text style={styles.chartLabel}>Present</Text>
+              </View>
+            </View>
           </View>
 
           <View style={styles.overallStats}>
@@ -276,7 +268,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     borderRadius: 10,
-    padding: 10,
+    padding: 20,
     marginBottom: 15,
     shadowColor: '#000',
     shadowOffset: {
@@ -286,6 +278,36 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  simpleChart: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  chartCircle: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#4CAF50',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  chartPercentage: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  chartLabel: {
+    fontSize: 12,
+    color: '#fff',
+    marginTop: 2,
   },
   overallStats: {
     flexDirection: 'row',
