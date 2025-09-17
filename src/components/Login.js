@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 const Login = ({ onBack, onLogin }) => {
   const [rollNumber, setRollNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = () => {
     if (!rollNumber || !password) {
@@ -77,8 +78,18 @@ const Login = ({ onBack, onLogin }) => {
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
               value={password}
               onChangeText={setPassword}
-              secureTextEntry
+              secureTextEntry={!showPassword}
             />
+            <TouchableOpacity
+              style={styles.eyeButton}
+              onPress={() => setShowPassword(!showPassword)}
+            >
+              <Ionicons 
+                name={showPassword ? "eye-off" : "eye"} 
+                size={20} 
+                color="rgba(255, 255, 255, 0.7)" 
+              />
+            </TouchableOpacity>
           </View>
 
           <TouchableOpacity style={styles.forgotPasswordButton} onPress={handleForgotPassword}>
@@ -180,6 +191,9 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     fontSize: 16,
     color: '#fff',
+  },
+  eyeButton: {
+    padding: 5,
   },
   forgotPasswordButton: {
     alignSelf: 'flex-end',
