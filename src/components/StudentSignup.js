@@ -170,7 +170,7 @@ const StudentSignup = ({ onBack, onComplete }) => {
 
   const renderStep4 = () => (
     <View style={styles.stepContainer}>
-      <Text style={styles.stepTitle}>Section Selection</Text>
+      <Text style={styles.stepTitle}>Section</Text>
       <Text style={styles.stepSubtitle}>Select your section</Text>
 
       <View style={styles.selectionContainer}>
