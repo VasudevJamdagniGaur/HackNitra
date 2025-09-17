@@ -21,7 +21,7 @@ const StudentSignup = ({ onBack, onComplete }) => {
     year: '',
   });
 
-  const courses = ['B.Tech', 'BE'];
+  const courses = ['B.Tech (TT)', 'B.Tech (CSE)', 'B.Tech (AI&ML)'];
   const sections = ['A', 'B', 'C', 'D'];
   const years = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 
