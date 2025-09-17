@@ -10,10 +10,16 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+// Import screen components
+import TrackExamsScreen from './TrackExamsScreen';
+import AttendanceScreen from './AttendanceScreen';
+import NotesScreen from './NotesScreen';
+
 const { width } = Dimensions.get('window');
 
 const Dashboard = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [currentScreen, setCurrentScreen] = useState('dashboard');
 
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: 'home', color: '#4CAF50' },
@@ -51,7 +57,11 @@ const Dashboard = () => {
 
   const handleMenuPress = (item) => {
     setSidebarVisible(false);
-    Alert.alert('Navigation', `Navigate to ${item.name}`);
+    setCurrentScreen(item.id);
+  };
+
+  const handleBackToDashboard = () => {
+    setCurrentScreen('dashboard');
   };
 
   const handleMarkAttendance = () => {
@@ -80,6 +90,20 @@ const Dashboard = () => {
     }
   };
 
+  // Render different screens based on currentScreen state
+  if (currentScreen === 'trackExams') {
+    return <TrackExamsScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+  }
+
+  if (currentScreen === 'attendance') {
+    return <AttendanceScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+  }
+
+  if (currentScreen === 'notes') {
+    return <NotesScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+  }
+
+  // Default dashboard view
   return (
     <View style={styles.container}>
       {/* Top Bar */}
