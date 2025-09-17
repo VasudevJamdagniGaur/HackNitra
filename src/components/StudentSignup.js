@@ -17,12 +17,12 @@ const StudentSignup = ({ onBack, onComplete }) => {
     college: '',
     email: '',
     course: '',
-    class: '',
+    section: '',
     year: '',
   });
 
   const courses = ['B.Tech', 'BE'];
-  const classes = ['A', 'B', 'C', 'D'];
+  const sections = ['A', 'B', 'C', 'D'];
   const years = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 
   const handleNext = () => {
@@ -43,8 +43,14 @@ const StudentSignup = ({ onBack, onComplete }) => {
       }
       setStep(3);
     } else if (step === 3) {
-      if (!formData.class || !formData.year) {
-        Alert.alert('Error', 'Please select both class and year');
+      if (!formData.year) {
+        Alert.alert('Error', 'Please select a year');
+        return;
+      }
+      setStep(4);
+    } else if (step === 4) {
+      if (!formData.section) {
+        Alert.alert('Error', 'Please select a section');
         return;
       }
       onComplete();
@@ -134,34 +140,11 @@ const StudentSignup = ({ onBack, onComplete }) => {
 
   const renderStep3 = () => (
     <View style={styles.stepContainer}>
-      <Text style={styles.stepTitle}>Class & Year</Text>
-      <Text style={styles.stepSubtitle}>Select your class and year</Text>
+      <Text style={styles.stepTitle}>Year Selection</Text>
+      <Text style={styles.stepSubtitle}>Select your academic year</Text>
 
       <View style={styles.selectionContainer}>
-        <Text style={styles.selectionLabel}>Class</Text>
-        <View style={styles.optionsRow}>
-          {classes.map((classItem) => (
-            <TouchableOpacity
-              key={classItem}
-              style={[
-                styles.optionButton,
-                formData.class === classItem && styles.selectedOptionButton,
-              ]}
-              onPress={() => updateFormData('class', classItem)}
-            >
-              <Text style={[
-                styles.optionButtonText,
-                formData.class === classItem && styles.selectedOptionButtonText,
-              ]}>
-                {classItem}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </View>
-
-      <View style={styles.selectionContainer}>
-        <Text style={styles.selectionLabel}>Year</Text>
+        <Text style={styles.selectionLabel}>Academic Year</Text>
         <View style={styles.optionsRow}>
           {years.map((year) => (
             <TouchableOpacity
@@ -185,6 +168,36 @@ const StudentSignup = ({ onBack, onComplete }) => {
     </View>
   );
 
+  const renderStep4 = () => (
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>Section Selection</Text>
+      <Text style={styles.stepSubtitle}>Select your section</Text>
+
+      <View style={styles.selectionContainer}>
+        <Text style={styles.selectionLabel}>Section</Text>
+        <View style={styles.optionsRow}>
+          {sections.map((section) => (
+            <TouchableOpacity
+              key={section}
+              style={[
+                styles.optionButton,
+                formData.section === section && styles.selectedOptionButton,
+              ]}
+              onPress={() => updateFormData('section', section)}
+            >
+              <Text style={[
+                styles.optionButtonText,
+                formData.section === section && styles.selectedOptionButtonText,
+              ]}>
+                Section {section}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -199,9 +212,9 @@ const StudentSignup = ({ onBack, onComplete }) => {
       {/* Progress Indicator */}
       <View style={styles.progressContainer}>
         <View style={styles.progressBar}>
-          <View style={[styles.progressFill, { width: `${(step / 3) * 100}%` }]} />
+          <View style={[styles.progressFill, { width: `${(step / 4) * 100}%` }]} />
         </View>
-        <Text style={styles.progressText}>Step {step} of 3</Text>
+        <Text style={styles.progressText}>Step {step} of 4</Text>
       </View>
 
       {/* Content */}
@@ -209,13 +222,14 @@ const StudentSignup = ({ onBack, onComplete }) => {
         {step === 1 && renderStep1()}
         {step === 2 && renderStep2()}
         {step === 3 && renderStep3()}
+        {step === 4 && renderStep4()}
       </ScrollView>
 
       {/* Footer */}
       <View style={styles.footer}>
         <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
           <Text style={styles.nextButtonText}>
-            {step === 3 ? 'Complete Registration' : 'Next'}
+            {step === 4 ? 'Complete Registration' : 'Next'}
           </Text>
           <Ionicons name="arrow-forward" size={20} color="#fff" />
         </TouchableOpacity>
