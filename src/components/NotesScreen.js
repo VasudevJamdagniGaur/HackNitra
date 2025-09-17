@@ -110,9 +110,6 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
     );
   };
 
-  const handleUpload = () => {
-    Alert.alert('Upload Note', 'Upload functionality will be implemented soon!');
-  };
 
   return (
     <View style={styles.container}>
@@ -125,9 +122,7 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
           <Ionicons name="menu" size={24} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.title}>Notes</Text>
-        <TouchableOpacity style={styles.uploadButton} onPress={handleUpload}>
-          <Ionicons name="cloud-upload" size={24} color="#fff" />
-        </TouchableOpacity>
+        <View style={styles.placeholder} />
       </View>
 
       {/* Subject Filter */}
@@ -264,8 +259,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
   },
-  uploadButton: {
-    padding: 10,
+  placeholder: {
+    width: 44,
   },
   menuButton: {
     padding: 10,
