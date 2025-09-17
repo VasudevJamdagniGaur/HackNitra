@@ -68,18 +68,6 @@ const AttendanceScreen = ({ onBack, onMenuPress }) => {
     return '#F44336';
   };
 
-  const handleMarkAttendance = () => {
-    Alert.alert(
-      'Mark Attendance',
-      'Camera will open to scan QR code for attendance.',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Open Camera', onPress: () => {
-          Alert.alert('Success', 'Attendance marked successfully!');
-        }},
-      ]
-    );
-  };
 
   const renderCircularChart = (percentage) => (
     <View style={styles.chartContainer}>
@@ -119,19 +107,6 @@ const AttendanceScreen = ({ onBack, onMenuPress }) => {
           </View>
         </View>
 
-        {/* Mark Attendance Button */}
-        <View style={styles.section}>
-          <TouchableOpacity style={styles.markAttendanceButton} onPress={handleMarkAttendance}>
-            <View style={styles.attendanceIcon}>
-              <Ionicons name="camera" size={30} color="#fff" />
-            </View>
-            <View style={styles.attendanceText}>
-              <Text style={styles.attendanceTitle}>Mark Attendance</Text>
-              <Text style={styles.attendanceSubtitle}>Scan QR code to mark your presence</Text>
-            </View>
-            <Ionicons name="arrow-forward" size={20} color="#fff" />
-          </TouchableOpacity>
-        </View>
 
         {/* Subject-wise Attendance */}
         <View style={styles.section}>
@@ -273,15 +248,15 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   chartCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    borderWidth: 8,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    borderWidth: 12,
     alignItems: 'center',
     justifyContent: 'center',
   },
   chartText: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   statsInfo: {
@@ -296,37 +271,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#4CAF50',
-  },
-  markAttendanceButton: {
-    backgroundColor: 'rgba(76, 175, 80, 0.2)',
-    borderRadius: 15,
-    padding: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(76, 175, 80, 0.3)',
-  },
-  attendanceIcon: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#4CAF50',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 15,
-  },
-  attendanceText: {
-    flex: 1,
-  },
-  attendanceTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 5,
-  },
-  attendanceSubtitle: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
   },
   subjectsContainer: {
     gap: 15,
