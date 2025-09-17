@@ -24,7 +24,6 @@ const AttendanceScreen = ({ onBack, onMenuPress }) => {
     { id: 'homework', name: 'Homework', icon: 'book', color: '#F44336' },
     { id: 'helpDesk', name: 'HelpDesk', icon: 'help-circle', color: '#607D8B' },
     { id: 'results', name: 'Results', icon: 'trophy', color: '#FFD700' },
-    { id: 'teacherRemarks', name: 'Teacher Remarks', icon: 'chatbubble', color: '#E91E63' },
     { id: 'achievements', name: 'Achievements', icon: 'star', color: '#FF5722' },
     { id: 'faculty', name: 'Faculty', icon: 'people', color: '#795548' },
   ];
