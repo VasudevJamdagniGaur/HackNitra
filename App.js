@@ -37,6 +37,10 @@ const App = () => {
     setCurrentState('roleSelection');
   };
 
+  const handleSignUp = () => {
+    setCurrentState('studentSignup');
+  };
+
   return (
     <PaperProvider>
       <StatusBar style="auto" />
@@ -50,7 +54,7 @@ const App = () => {
         <StudentSignup onBack={handleBack} onComplete={handleSignupComplete} />
       )}
       {currentState === 'login' && (
-        <Login onBack={handleBack} onLogin={handleLogin} />
+        <Login onBack={handleBack} onLogin={handleLogin} onSignUp={handleSignUp} />
       )}
       {currentState === 'dashboard' && (
         <Dashboard />

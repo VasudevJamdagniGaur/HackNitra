@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const Login = ({ onBack, onLogin }) => {
+const Login = ({ onBack, onLogin, onSignUp }) => {
   const [rollNumber, setRollNumber] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -105,10 +105,17 @@ const Login = ({ onBack, onLogin }) => {
 
       {/* Footer */}
       <View style={styles.footer}>
-        <Text style={styles.footerText}>Don't have an account?</Text>
-        <TouchableOpacity onPress={onBack}>
-          <Text style={styles.signupLink}>Sign Up</Text>
+        <TouchableOpacity style={styles.signupButton} onPress={onSignUp}>
+          <Text style={styles.signupButtonText}>Sign Up</Text>
+          <Ionicons name="person-add" size={20} color="#fff" />
         </TouchableOpacity>
+        
+        <View style={styles.footerTextContainer}>
+          <Text style={styles.footerText}>Don't have an account?</Text>
+          <TouchableOpacity onPress={onSignUp}>
+            <Text style={styles.signupLink}>Create Account</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -219,10 +226,28 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   footer: {
+    paddingBottom: 30,
+    paddingHorizontal: 20,
+  },
+  signupButton: {
+    backgroundColor: '#4CAF50',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 15,
+    borderRadius: 12,
+    marginBottom: 20,
+  },
+  signupButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginRight: 8,
+  },
+  footerTextContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 30,
   },
   footerText: {
     fontSize: 16,
