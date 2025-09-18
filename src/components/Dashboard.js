@@ -29,7 +29,7 @@ import { userProfile } from '../data/userProfile';
 
 const { width } = Dimensions.get('window');
 
-const Dashboard = () => {
+const Dashboard = ({ onLogout }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [currentScreen, setCurrentScreen] = useState('dashboard');
   const [profileVisible, setProfileVisible] = useState(false);
@@ -109,26 +109,11 @@ const Dashboard = () => {
   };
 
   const handleLogout = () => {
-    Alert.alert(
-      'Logout',
-      'Are you sure you want to logout?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Logout',
-          style: 'destructive',
-          onPress: () => {
-            // Here you would typically clear user data, tokens, etc.
-            // For now, we'll just show a success message
-            Alert.alert('Success', 'Logged out successfully!');
-            setProfileVisible(false);
-          },
-        },
-      ]
-    );
+    // Close profile and navigate to login
+    setProfileVisible(false);
+    if (onLogout) {
+      onLogout();
+    }
   };
 
   const getPriorityColor = (priority) => {
@@ -142,11 +127,11 @@ const Dashboard = () => {
 
   // Render different screens based on currentScreen state
   if (currentScreen === 'trackExams') {
-    return <TrackExamsScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+    return <TrackExamsScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} onLogout={onLogout} />;
   }
 
   if (currentScreen === 'attendance') {
-    return <AttendanceScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+    return <AttendanceScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} onLogout={onLogout} />;
   }
 
   if (currentScreen === 'notes') {

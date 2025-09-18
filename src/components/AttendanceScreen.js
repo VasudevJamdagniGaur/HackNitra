@@ -14,7 +14,7 @@ import { userProfile } from '../data/userProfile';
 
 const { width } = Dimensions.get('window');
 
-const AttendanceScreen = ({ onBack, onMenuPress }) => {
+const AttendanceScreen = ({ onBack, onMenuPress, onLogout }) => {
   const [selectedPeriod, setSelectedPeriod] = useState('monthly');
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [profileVisible, setProfileVisible] = useState(false);
@@ -55,8 +55,10 @@ const AttendanceScreen = ({ onBack, onMenuPress }) => {
           text: 'Logout',
           style: 'destructive',
           onPress: () => {
-            Alert.alert('Success', 'Logged out successfully!');
             setProfileVisible(false);
+            if (onLogout) {
+              onLogout();
+            }
           },
         },
       ]

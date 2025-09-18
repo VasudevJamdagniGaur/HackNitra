@@ -14,7 +14,7 @@ import { userProfile } from '../data/userProfile';
 
 const { width } = Dimensions.get('window');
 
-const TrackExamsScreen = ({ onBack, onMenuPress }) => {
+const TrackExamsScreen = ({ onBack, onMenuPress, onLogout }) => {
   const [selectedTab, setSelectedTab] = useState('upcoming');
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [profileVisible, setProfileVisible] = useState(false);
@@ -55,8 +55,10 @@ const TrackExamsScreen = ({ onBack, onMenuPress }) => {
           text: 'Logout',
           style: 'destructive',
           onPress: () => {
-            Alert.alert('Success', 'Logged out successfully!');
             setProfileVisible(false);
+            if (onLogout) {
+              onLogout();
+            }
           },
         },
       ]

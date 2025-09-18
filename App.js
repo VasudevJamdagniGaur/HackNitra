@@ -31,6 +31,10 @@ const App = () => {
     setCurrentState('studentSignup');
   };
 
+  const handleLogout = () => {
+    setCurrentState('login');
+  };
+
   return (
     <PaperProvider>
       <StatusBar style="auto" />
@@ -44,7 +48,7 @@ const App = () => {
         <Login onBack={handleBack} onLogin={handleLogin} onSignUp={handleSignUp} />
       )}
       {currentState === 'dashboard' && (
-        <Dashboard />
+        <Dashboard onLogout={handleLogout} />
       )}
     </PaperProvider>
   );

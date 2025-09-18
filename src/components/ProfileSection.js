@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -12,6 +13,28 @@ const { width } = Dimensions.get('window');
 
 const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
   if (!visible) return null;
+
+  const handleLogoutPress = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: () => {
+            if (onLogout) {
+              onLogout();
+            }
+          },
+        },
+      ]
+    );
+  };
 
   return (
     <View style={styles.profileSection}>
@@ -79,7 +102,7 @@ const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
         
         {/* Logout Button */}
         <View style={styles.logoutContainer}>
-          <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>
+          <TouchableOpacity style={styles.logoutButton} onPress={handleLogoutPress}>
             <Ionicons name="log-out-outline" size={20} color="#fff" />
             <Text style={styles.logoutText}>Logout</Text>
           </TouchableOpacity>
