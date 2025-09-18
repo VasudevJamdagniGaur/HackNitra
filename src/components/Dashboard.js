@@ -23,6 +23,8 @@ import FacultyScreen from './FacultyScreen';
 // Import shared components
 import ProfileButton from './ProfileButton';
 import ProfileSection from './ProfileSection';
+import QRScanner from './QRScanner';
+import AttendanceSubmission from './AttendanceSubmission';
 import { userProfile } from '../data/userProfile';
 
 const { width } = Dimensions.get('window');
@@ -31,6 +33,9 @@ const Dashboard = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [currentScreen, setCurrentScreen] = useState('dashboard');
   const [profileVisible, setProfileVisible] = useState(false);
+  const [qrScannerVisible, setQrScannerVisible] = useState(false);
+  const [attendanceSubmissionVisible, setAttendanceSubmissionVisible] = useState(false);
+  const [scannedAttendanceData, setScannedAttendanceData] = useState(null);
 
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: 'home', color: '#4CAF50' },
@@ -75,16 +80,28 @@ const Dashboard = () => {
   };
 
   const handleMarkAttendance = () => {
-    Alert.alert(
-      'Mark Attendance',
-      'Camera will open to scan QR code for attendance.',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Open Camera', onPress: () => {
-          Alert.alert('Success', 'Attendance marked successfully!');
-        }},
-      ]
-    );
+    setQrScannerVisible(true);
+  };
+
+  const handleQRScanned = (attendanceData) => {
+    setScannedAttendanceData(attendanceData);
+    setQrScannerVisible(false);
+    setAttendanceSubmissionVisible(true);
+  };
+
+  const handleAttendanceSubmitted = () => {
+    setAttendanceSubmissionVisible(false);
+    setScannedAttendanceData(null);
+    Alert.alert('Success', 'Attendance marked successfully!');
+  };
+
+  const handleBackFromScanner = () => {
+    setQrScannerVisible(false);
+  };
+
+  const handleBackFromSubmission = () => {
+    setAttendanceSubmissionVisible(false);
+    setScannedAttendanceData(null);
   };
 
   const handleProfilePress = () => {
@@ -154,6 +171,27 @@ const Dashboard = () => {
 
   if (currentScreen === 'faculty') {
     return <FacultyScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+  }
+
+  // QR Scanner Screen
+  if (qrScannerVisible) {
+    return (
+      <QRScanner
+        onBack={handleBackFromScanner}
+        onQRScanned={handleQRScanned}
+      />
+    );
+  }
+
+  // Attendance Submission Screen
+  if (attendanceSubmissionVisible && scannedAttendanceData) {
+    return (
+      <AttendanceSubmission
+        attendanceData={scannedAttendanceData}
+        onBack={handleBackFromSubmission}
+        onSubmit={handleAttendanceSubmitted}
+      />
+    );
   }
 
   // Default dashboard view
