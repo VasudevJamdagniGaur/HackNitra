@@ -475,7 +475,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: width * 0.6,
+    width: width < 768 ? width : Math.min(width * 0.2, 280),
     height: '100%',
     backgroundColor: '#0F254D',
     zIndex: 1000,
