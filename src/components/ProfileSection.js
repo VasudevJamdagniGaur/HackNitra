@@ -8,10 +8,13 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useAuth } from '../contexts/AuthContext';
 
 const { width } = Dimensions.get('window');
 
 const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
+  const { signOut } = useAuth();
+  
   if (!visible) return null;
 
   const handleLogoutPress = () => {
@@ -26,9 +29,23 @@ const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
         {
           text: 'Logout',
           style: 'destructive',
-          onPress: () => {
-            if (onLogout) {
-              onLogout();
+          onPress: async () => {
+            try {
+              console.log('Starting logout process...');
+              const result = await signOut();
+              console.log('Logout result:', result);
+              
+              if (result.success) {
+                console.log('Logout successful, calling onLogout...');
+                if (onLogout) {
+                  onLogout();
+                }
+              } else {
+                Alert.alert('Logout Failed', result.error || 'Failed to logout');
+              }
+            } catch (error) {
+              console.error('Logout error:', error);
+              Alert.alert('Logout Error', 'An error occurred during logout');
             }
           },
         },

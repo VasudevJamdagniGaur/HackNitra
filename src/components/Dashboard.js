@@ -36,7 +36,7 @@ const Dashboard = ({ onLogout }) => {
   const [profileVisible, setProfileVisible] = useState(false);
   const [qrScannerVisible, setQrScannerVisible] = useState(false);
   const [attendanceSubmissionVisible, setAttendanceSubmissionVisible] = useState(false);
-  const { signOut, userProfile: firebaseUserProfile } = useAuth();
+  const { userProfile: firebaseUserProfile } = useAuth();
   const [scannedAttendanceData, setScannedAttendanceData] = useState(null);
 
   const menuItems = [
@@ -110,11 +110,10 @@ const Dashboard = ({ onLogout }) => {
     setProfileVisible(true);
   };
 
-  const handleLogout = async () => {
-    // Close profile and sign out from Firebase
+  const handleLogout = () => {
+    // Close profile and call parent logout handler
     setProfileVisible(false);
-    const result = await signOut();
-    if (result.success && onLogout) {
+    if (onLogout) {
       onLogout();
     }
   };

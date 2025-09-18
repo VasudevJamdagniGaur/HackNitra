@@ -23,13 +23,16 @@ const LoadingScreen = () => (
 // Main app component with authentication
 const AppContent = () => {
   const [currentState, setCurrentState] = useState('splash');
-  const { user, loading } = useAuth();
+  const { user, loading, signOut } = useAuth();
 
   useEffect(() => {
+    console.log('Auth state changed - user:', user, 'loading:', loading);
     if (!loading) {
       if (user) {
+        console.log('User is authenticated, going to dashboard');
         setCurrentState('dashboard');
       } else {
+        console.log('User is not authenticated, going to login');
         setCurrentState('login');
       }
     }
@@ -59,7 +62,10 @@ const AppContent = () => {
     setCurrentState('studentSignup');
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    console.log('App handleLogout called');
+    // The ProfileSection already handles Firebase signOut
+    // Just ensure we go to login state
     setCurrentState('login');
   };
 
