@@ -16,7 +16,7 @@ const { width } = Dimensions.get('window');
 
 const HomeworkScreen = ({ onBack, onMenuPress }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [selectedDate, setSelectedDate] = useState('2024-09-10');
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [homeworkData, setHomeworkData] = useState({
     '2024-09-10': [
@@ -227,9 +227,61 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
     ],
-    '2024-09-16': [
+    '2024-09-15': [
       {
         id: 21,
+        subject: 'Machine Learning',
+        subjectCode: 'BCS-401',
+        title: 'Weekend ML Project',
+        description: 'Complete end-to-end ML project: data collection, preprocessing, modeling, and evaluation',
+        dueDate: '2024-09-17',
+        priority: 'high',
+        completed: false,
+      },
+      {
+        id: 22,
+        subject: 'Deep Learning',
+        subjectCode: 'BCS-404',
+        title: 'Neural Network Architecture Design',
+        description: 'Design custom neural network architecture for specific problem domain',
+        dueDate: '2024-09-16',
+        priority: 'high',
+        completed: false,
+      },
+      {
+        id: 23,
+        subject: 'Computer Vision',
+        subjectCode: 'BCS-406',
+        title: 'Image Classification Project',
+        description: 'Build complete image classification pipeline using transfer learning',
+        dueDate: '2024-09-17',
+        priority: 'medium',
+        completed: false,
+      },
+      {
+        id: 24,
+        subject: 'Natural Language Processing',
+        subjectCode: 'BCS-407',
+        title: 'Text Classification Model',
+        description: 'Create text classifier for news article categorization',
+        dueDate: '2024-09-16',
+        priority: 'medium',
+        completed: false,
+      },
+      {
+        id: 25,
+        subject: 'Data Visualization',
+        subjectCode: 'BCS-405',
+        title: 'ML Results Dashboard',
+        description: 'Create comprehensive dashboard showing model performance and insights',
+        dueDate: '2024-09-17',
+        priority: 'low',
+        completed: false,
+      },
+    ],
+    '2024-09-16': [
+      {
+        id: 26,
         subject: 'Machine Learning',
         subjectCode: 'BCS-401',
         title: 'Ensemble Methods',
@@ -239,7 +291,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 22,
+        id: 27,
         subject: 'Deep Learning',
         subjectCode: 'BCS-404',
         title: 'Recurrent Neural Networks',
@@ -249,7 +301,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 23,
+        id: 28,
         subject: 'Computer Vision',
         subjectCode: 'BCS-406',
         title: 'Object Detection',
@@ -259,7 +311,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 24,
+        id: 29,
         subject: 'Natural Language Processing',
         subjectCode: 'BCS-407',
         title: 'Sentiment Analysis',
@@ -269,7 +321,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 25,
+        id: 30,
         subject: 'Data Visualization',
         subjectCode: 'BCS-405',
         title: 'Interactive Dashboards',
@@ -281,7 +333,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
     ],
     '2024-09-17': [
       {
-        id: 26,
+        id: 31,
         subject: 'Machine Learning',
         subjectCode: 'BCS-401',
         title: 'Model Evaluation and Validation',
@@ -291,7 +343,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 27,
+        id: 32,
         subject: 'Deep Learning',
         subjectCode: 'BCS-404',
         title: 'Transfer Learning',
@@ -301,7 +353,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 28,
+        id: 33,
         subject: 'Reinforcement Learning',
         subjectCode: 'BCS-409',
         title: 'Q-Learning Algorithm',
@@ -311,7 +363,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 29,
+        id: 34,
         subject: 'Data Mining',
         subjectCode: 'BCS-408',
         title: 'Clustering Analysis',
@@ -321,7 +373,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 30,
+        id: 35,
         subject: 'Mathematics for AI',
         subjectCode: 'BCS-402',
         title: 'Information Theory',
@@ -333,7 +385,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
     ],
     '2024-09-18': [
       {
-        id: 31,
+        id: 36,
         subject: 'Machine Learning',
         subjectCode: 'BCS-401',
         title: 'Feature Engineering',
@@ -343,7 +395,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 32,
+        id: 37,
         subject: 'Deep Learning',
         subjectCode: 'BCS-404',
         title: 'Generative Adversarial Networks',
@@ -353,7 +405,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 33,
+        id: 38,
         subject: 'Computer Vision',
         subjectCode: 'BCS-406',
         title: 'Image Segmentation',
@@ -363,7 +415,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 34,
+        id: 39,
         subject: 'Natural Language Processing',
         subjectCode: 'BCS-407',
         title: 'Word Embeddings',
@@ -373,7 +425,7 @@ const HomeworkScreen = ({ onBack, onMenuPress }) => {
         completed: false,
       },
       {
-        id: 35,
+        id: 40,
         subject: 'Python Programming',
         subjectCode: 'BCC-302',
         title: 'ML Model Deployment',
