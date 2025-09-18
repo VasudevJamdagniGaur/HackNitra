@@ -17,12 +17,8 @@ const App = () => {
   };
 
   const handleRoleSelect = (role) => {
-    if (role === 'student') {
-      setCurrentState('studentSignup');
-    } else {
-      // For now, teachers go directly to login
-      setCurrentState('login');
-    }
+    // Both students and teachers go to login page
+    setCurrentState('login');
   };
 
   const handleSignupComplete = () => {
