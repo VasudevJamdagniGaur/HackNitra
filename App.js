@@ -22,7 +22,7 @@ const App = () => {
   };
 
   const handleSignupComplete = () => {
-    setCurrentState('login');
+    setCurrentState('dashboard');
   };
 
   const handleLogin = () => {
