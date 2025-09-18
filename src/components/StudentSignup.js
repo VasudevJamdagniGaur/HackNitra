@@ -7,8 +7,11 @@ import {
   TextInput,
   ScrollView,
   Alert,
+  Linking,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as MailComposer from 'expo-mail-composer';
 
 const StudentSignup = ({ onBack, onComplete }) => {
   const [step, setStep] = useState(1);
@@ -58,7 +61,7 @@ const StudentSignup = ({ onBack, onComplete }) => {
         Alert.alert('Error', 'Please select a section');
         return;
       }
-      onComplete();
+      sendQueryEmail();
     }
   };
 
@@ -72,6 +75,88 @@ const StudentSignup = ({ onBack, onComplete }) => {
 
   const updateFormData = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const sendQueryEmail = async () => {
+    try {
+      const emailBody = `I have noticed that my details have not been properly included in the college app database. Kindly resolve this issue at the earliest as it is causing inconvenience.
+
+Student Details:
+- Name: ${formData.name}
+- College: ${formData.college}
+- Email: ${formData.email}
+- Roll Number: ${formData.rollNumber}
+- Course: ${formData.course}
+- Year: ${formData.year}
+- Section: ${formData.section}
+
+Please update my details in the database so I can access the college app properly.
+
+Thank you for your assistance.`;
+
+      if (Platform.OS === 'web') {
+        // Use mailto link for web
+        const mailtoLink = `mailto:coolbuddyvasudev@gmail.com?subject=Student Database Update Request&body=${encodeURIComponent(emailBody)}`;
+        await Linking.openURL(mailtoLink);
+        
+        Alert.alert(
+          'Query Submitted',
+          'Your email client has opened with the query. Please send the email to complete the process.',
+          [
+            {
+              text: 'OK',
+              onPress: () => onComplete()
+            }
+          ]
+        );
+      } else {
+        // Use MailComposer for mobile
+        const isAvailable = await MailComposer.isAvailableAsync();
+        
+        if (isAvailable) {
+          await MailComposer.composeAsync({
+            recipients: ['coolbuddyvasudev@gmail.com'],
+            subject: 'Student Database Update Request',
+            body: emailBody,
+            isHtml: false,
+          });
+          
+          Alert.alert(
+            'Query Submitted',
+            'Your query has been sent successfully. You will receive a response soon.',
+            [
+              {
+                text: 'OK',
+                onPress: () => onComplete()
+              }
+            ]
+          );
+        } else {
+          Alert.alert(
+            'Email Not Available',
+            'Email service is not available on this device. Please contact the college directly.',
+            [
+              {
+                text: 'OK',
+                onPress: () => onComplete()
+              }
+            ]
+          );
+        }
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      Alert.alert(
+        'Error',
+        'Failed to send email. Please try again or contact the college directly.',
+        [
+          {
+            text: 'OK',
+            onPress: () => onComplete()
+          }
+        ]
+      );
+    }
   };
 
   const renderStep1 = () => (
@@ -246,7 +331,7 @@ const StudentSignup = ({ onBack, onComplete }) => {
       <View style={styles.footer}>
         <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
           <Text style={styles.nextButtonText}>
-            {step === 4 ? 'Complete Registration' : 'Next'}
+            {step === 4 ? 'Submit Query' : 'Next'}
           </Text>
           <Ionicons name="arrow-forward" size={20} color="#fff" />
         </TouchableOpacity>
