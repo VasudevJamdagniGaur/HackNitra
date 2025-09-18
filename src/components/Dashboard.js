@@ -219,24 +219,6 @@ const Dashboard = () => {
           </TouchableOpacity>
         </View>
 
-        {/* Quick Actions */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Quick Actions</Text>
-          <View style={styles.quickActionsContainer}>
-            {menuItems.slice(1, 5).map((item) => (
-              <TouchableOpacity
-                key={item.id}
-                style={styles.quickActionButton}
-                onPress={() => handleMenuPress(item)}
-              >
-                <View style={[styles.quickActionIcon, { backgroundColor: item.color }]}>
-                  <Ionicons name={item.icon} size={24} color="#fff" />
-                </View>
-                <Text style={styles.quickActionText}>{item.name}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
 
         {/* Stats Section */}
         <View style={styles.section}>
@@ -440,35 +422,6 @@ const styles = StyleSheet.create({
   attendanceSubtitle: {
     fontSize: 14,
     color: 'rgba(255, 255, 255, 0.7)',
-  },
-  quickActionsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  quickActionButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    width: '48%',
-    alignItems: 'center',
-    padding: 20,
-    borderRadius: 15,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-  },
-  quickActionIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
-  quickActionText: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#fff',
-    textAlign: 'center',
   },
   statsContainer: {
     flexDirection: 'row',
