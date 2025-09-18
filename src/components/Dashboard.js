@@ -239,26 +239,34 @@ const Dashboard = ({ onLogout }) => {
                 </View>
 
         {/* Notice Board */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Notice Board</Text>
+        <View style={styles.noticeBoardSection}>
           <View style={styles.noticeBoardContainer}>
-            <Text style={styles.noticeBoardHeading}>Important Notices</Text>
+            <View style={styles.noticeBoardTitleRow}>
+              <Ionicons name="notifications" size={22} color="#FACC15" />
+              <Text style={styles.noticeBoardTitle}>Notice Board</Text>
+            </View>
             <View style={styles.noticePointsContainer}>
-              {notices.map((notice) => (
-                <View key={notice.id} style={styles.noticePoint}>
-                  <View style={styles.noticePointHeader}>
-                    <View
-                      style={[
-                        styles.priorityIndicator,
-                        { backgroundColor: getPriorityColor(notice.priority) },
-                      ]}
-                    />
-                    <Text style={styles.noticePointTitle}>{notice.title}</Text>
+              {notices.slice(0, 3).map((notice, index) => (
+                <View key={notice.id}>
+                  <View style={styles.noticePoint}>
+                    <View style={styles.noticePointHeader}>
+                      <View
+                        style={[
+                          styles.priorityIndicator,
+                          { backgroundColor: getPriorityColor(notice.priority) },
+                        ]}
+                      />
+                      <Text style={styles.noticePointTitle}>{notice.title}</Text>
+                    </View>
+                    <Text style={styles.noticePointDate}>{notice.date}</Text>
                   </View>
-                  <Text style={styles.noticePointDate}>{notice.date}</Text>
+                  {index < 2 && <View style={styles.noticeDivider} />}
                 </View>
               ))}
             </View>
+            <TouchableOpacity style={styles.viewAllButton}>
+              <Text style={styles.viewAllText}>View All →</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -474,41 +482,47 @@ const styles = StyleSheet.create({
     color: '#E6EEF8',
     marginBottom: 15,
   },
+  noticeBoardSection: {
+    marginTop: 16,
+    marginHorizontal: 16,
+    marginBottom: 12,
+  },
   noticeBoardContainer: {
     backgroundColor: '#0F1724',
-    borderRadius: 20,
-    padding: 25,
+    borderRadius: 14,
+    padding: 16,
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.06)',
-    aspectRatio: 1,
-    maxWidth: 350,
-    alignSelf: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 2,
     },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 8,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  noticeBoardHeading: {
-    fontSize: 20,
+  noticeBoardTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  noticeBoardTitle: {
+    fontSize: 17,
     fontWeight: 'bold',
     color: '#E6EEF8',
-    textAlign: 'center',
-    marginBottom: 25,
-    borderBottomWidth: 2,
-    borderBottomColor: '#1E3A8A',
-    paddingBottom: 15,
+    marginLeft: 8,
   },
   noticePointsContainer: {
-    flex: 1,
-    justifyContent: 'space-around',
+    marginBottom: 12,
   },
   noticePoint: {
-    marginBottom: 18,
-    paddingVertical: 10,
+    paddingVertical: 8,
+  },
+  noticeDivider: {
+    height: 1,
+    backgroundColor: 'rgba(255,255,255,0.06)',
+    marginVertical: 6,
   },
   noticePointHeader: {
     flexDirection: 'row',
@@ -523,16 +537,24 @@ const styles = StyleSheet.create({
   },
   noticePointTitle: {
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: '500',
     color: '#E6EEF8',
     flex: 1,
-    lineHeight: 22,
+    lineHeight: 20,
   },
   noticePointDate: {
-    fontSize: 13,
+    fontSize: 14,
     color: '#A9C3FF',
-    fontStyle: 'italic',
-    marginLeft: 27,
+    marginLeft: 28,
+  },
+  viewAllButton: {
+    alignSelf: 'flex-end',
+    paddingTop: 12,
+  },
+  viewAllText: {
+    fontSize: 14,
+    color: '#1E3A8A',
+    fontWeight: '500',
   },
   attendanceButton: {
     backgroundColor: '#1E3A8A',
