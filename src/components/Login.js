@@ -105,17 +105,12 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
 
       {/* Footer */}
       <View style={styles.footer}>
+        <Text style={styles.footerText}>Don't have an account?</Text>
+        
         <TouchableOpacity style={styles.signupButton} onPress={onSignUp}>
           <Text style={styles.signupButtonText}>Create Account</Text>
           <Ionicons name="person-add" size={20} color="#fff" />
         </TouchableOpacity>
-        
-        <View style={styles.footerTextContainer}>
-          <Text style={styles.footerText}>Don't have an account?</Text>
-          <TouchableOpacity onPress={onSignUp}>
-            <Text style={styles.signupLink}>Create Account</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </View>
   );
@@ -228,6 +223,13 @@ const styles = StyleSheet.create({
   footer: {
     paddingBottom: 30,
     paddingHorizontal: 20,
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.7)',
+    marginBottom: 15,
+    textAlign: 'center',
   },
   signupButton: {
     backgroundColor: '#4CAF50',
@@ -236,28 +238,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 15,
     borderRadius: 12,
-    marginBottom: 20,
+    width: '100%',
   },
   signupButtonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
     marginRight: 8,
-  },
-  footerTextContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  footerText: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.7)',
-    marginRight: 5,
-  },
-  signupLink: {
-    fontSize: 16,
-    color: '#4CAF50',
-    fontWeight: 'bold',
   },
 });
 
