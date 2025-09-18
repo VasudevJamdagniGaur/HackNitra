@@ -54,8 +54,8 @@ const Dashboard = ({ onLogout }) => {
   const notices = [
     {
       id: 1,
-      title: 'Mid-term Examination Schedule',
-      date: '2024-01-15',
+      title: 'Nitra Hack Gen 1.0',
+      date: '2024-09-20',
       priority: 'high',
     },
     {
