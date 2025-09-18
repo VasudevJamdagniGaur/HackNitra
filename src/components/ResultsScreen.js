@@ -52,13 +52,34 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
       return null;
     }
     
-    const results = {
-      sessional1: { marks: 85, maxMarks: 100, grade: 'A' },
-      sessional2: { marks: 78, maxMarks: 100, grade: 'B+' },
-      external: { marks: 82, maxMarks: 100, grade: 'A-' },
-      practicals: { marks: 90, maxMarks: 100, grade: 'A' },
-    };
-    return results;
+    // Semester 1 subjects data
+    if (semesterId === 1) {
+      return {
+        subjects: [
+          { code: 'BAS101', name: 'Engineering Physics', type: 'Theory', sessional1: 10, sessional2: 39, external: 0, practical: 0, grade: 'D' },
+          { code: 'BAS103', name: 'Engineering Mathematics-I', type: 'Theory', sessional1: 6, sessional2: 3, external: 0, practical: 0, grade: 'F' },
+          { code: 'BEE101', name: 'Fundamentals of Electrical Engineering', type: 'Theory', sessional1: 19, sessional2: 27, external: 0, practical: 0, grade: 'D' },
+          { code: 'BCS101', name: 'Programming for Problem Solving', type: 'Theory', sessional1: 15, sessional2: 36, external: 0, practical: 0, grade: 'C' },
+          { code: 'BAS104', name: 'Environment and Ecology', type: 'Theory', sessional1: 5, sessional2: 46, external: 0, practical: 0, grade: 'C' },
+          { code: 'BAS151', name: 'Engineering Physics Lab', type: 'Practical', sessional1: 38, sessional2: 36, external: 0, practical: 0, grade: 'B+' },
+          { code: 'BEE151', name: 'Basic Electrical Engineering Lab', type: 'Practical', sessional1: 38, sessional2: 38, external: 0, practical: 0, grade: 'B+' },
+          { code: 'BCS151', name: 'Programming for Problem Solving Lab', type: 'Practical', sessional1: 30, sessional2: 30, external: 0, practical: 0, grade: 'B-' },
+          { code: 'BCE151', name: 'Engineering Graphics & Design Lab', type: 'Practical', sessional1: 30, sessional2: 47, external: 0, practical: 0, grade: 'B+' },
+        ]
+      };
+    }
+    
+    // Semester 2 - keeping original format for now
+    if (semesterId === 2) {
+      return {
+        sessional1: { marks: 85, maxMarks: 100, grade: 'A' },
+        sessional2: { marks: 78, maxMarks: 100, grade: 'B+' },
+        external: { marks: 82, maxMarks: 100, grade: 'A-' },
+        practicals: { marks: 90, maxMarks: 100, grade: 'A' },
+      };
+    }
+    
+    return null;
   };
 
   const getGradeColor = (grade) => {
@@ -67,7 +88,10 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
       case 'A-': return '#8BC34A';
       case 'B+': return '#FF9800';
       case 'B': return '#FFC107';
+      case 'B-': return '#FF9800';
       case 'C': return '#FF5722';
+      case 'D': return '#F44336';
+      case 'F': return '#D32F2F';
       default: return '#666';
     }
   };
@@ -107,47 +131,84 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
         <ScrollView style={styles.resultsContent}>
           {results ? (
             <>
-              <View style={styles.resultsGrid}>
-                <View style={styles.resultCard}>
-                  <Text style={styles.resultLabel}>Sessional 1</Text>
-                  <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional1.grade) }]}>
-                    {results.sessional1.marks}/{results.sessional1.maxMarks}
-                  </Text>
-                  <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional1.grade) }]}>
-                    {results.sessional1.grade}
-                  </Text>
+              {results.subjects ? (
+                // New subject-based layout for Semester 1
+                <View style={styles.subjectsContainer}>
+                  {results.subjects.map((subject, index) => (
+                    <View key={index} style={styles.subjectCard}>
+                      <View style={styles.subjectHeader}>
+                        <Text style={styles.subjectCode}>{subject.code}</Text>
+                        <Text style={[styles.subjectGrade, { color: getGradeColor(subject.grade) }]}>
+                          {subject.grade}
+                        </Text>
+                      </View>
+                      <Text style={styles.subjectName}>{subject.name}</Text>
+                      <Text style={styles.subjectType}>{subject.type}</Text>
+                      <View style={styles.marksContainer}>
+                        <View style={styles.markRow}>
+                          <Text style={styles.markLabel}>Sessional 1:</Text>
+                          <Text style={styles.markValue}>{subject.sessional1}</Text>
+                        </View>
+                        <View style={styles.markRow}>
+                          <Text style={styles.markLabel}>Sessional 2:</Text>
+                          <Text style={styles.markValue}>{subject.sessional2}</Text>
+                        </View>
+                        <View style={styles.markRow}>
+                          <Text style={styles.markLabel}>External:</Text>
+                          <Text style={styles.markValue}>{subject.external || '–'}</Text>
+                        </View>
+                        <View style={styles.markRow}>
+                          <Text style={styles.markLabel}>Practical:</Text>
+                          <Text style={styles.markValue}>{subject.practical || '–'}</Text>
+                        </View>
+                      </View>
+                    </View>
+                  ))}
                 </View>
+              ) : (
+                // Original grid layout for other semesters
+                <View style={styles.resultsGrid}>
+                  <View style={styles.resultCard}>
+                    <Text style={styles.resultLabel}>Sessional 1</Text>
+                    <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional1.grade) }]}>
+                      {results.sessional1.marks}/{results.sessional1.maxMarks}
+                    </Text>
+                    <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional1.grade) }]}>
+                      {results.sessional1.grade}
+                    </Text>
+                  </View>
 
-                <View style={styles.resultCard}>
-                  <Text style={styles.resultLabel}>Sessional 2</Text>
-                  <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional2.grade) }]}>
-                    {results.sessional2.marks}/{results.sessional2.maxMarks}
-                  </Text>
-                  <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional2.grade) }]}>
-                    {results.sessional2.grade}
-                  </Text>
-                </View>
+                  <View style={styles.resultCard}>
+                    <Text style={styles.resultLabel}>Sessional 2</Text>
+                    <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional2.grade) }]}>
+                      {results.sessional2.marks}/{results.sessional2.maxMarks}
+                    </Text>
+                    <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional2.grade) }]}>
+                      {results.sessional2.grade}
+                    </Text>
+                  </View>
 
-                <View style={styles.resultCard}>
-                  <Text style={styles.resultLabel}>External</Text>
-                  <Text style={[styles.resultMarks, { color: getGradeColor(results.external.grade) }]}>
-                    {results.external.marks}/{results.external.maxMarks}
-                  </Text>
-                  <Text style={[styles.resultGrade, { color: getGradeColor(results.external.grade) }]}>
-                    {results.external.grade}
-                  </Text>
-                </View>
+                  <View style={styles.resultCard}>
+                    <Text style={styles.resultLabel}>External</Text>
+                    <Text style={[styles.resultMarks, { color: getGradeColor(results.external.grade) }]}>
+                      {results.external.marks}/{results.external.maxMarks}
+                    </Text>
+                    <Text style={[styles.resultGrade, { color: getGradeColor(results.external.grade) }]}>
+                      {results.external.grade}
+                    </Text>
+                  </View>
 
-                <View style={styles.resultCard}>
-                  <Text style={styles.resultLabel}>Practicals</Text>
-                  <Text style={[styles.resultMarks, { color: getGradeColor(results.practicals.grade) }]}>
-                    {results.practicals.marks}/{results.practicals.maxMarks}
-                  </Text>
-                  <Text style={[styles.resultGrade, { color: getGradeColor(results.practicals.grade) }]}>
-                    {results.practicals.grade}
-                  </Text>
+                  <View style={styles.resultCard}>
+                    <Text style={styles.resultLabel}>Practicals</Text>
+                    <Text style={[styles.resultMarks, { color: getGradeColor(results.practicals.grade) }]}>
+                      {results.practicals.marks}/{results.practicals.maxMarks}
+                    </Text>
+                    <Text style={[styles.resultGrade, { color: getGradeColor(results.practicals.grade) }]}>
+                      {results.practicals.grade}
+                    </Text>
+                  </View>
                 </View>
-              </View>
+              )}
 
               {/* Teacher Remarks Section */}
               <View style={styles.remarksSection}>
@@ -464,6 +525,68 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
     lineHeight: 24,
+  },
+  subjectsContainer: {
+    padding: 16,
+  },
+  subjectCard: {
+    backgroundColor: '#0F1724',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.06)',
+  },
+  subjectHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  subjectCode: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1E3A8A',
+    backgroundColor: 'rgba(30, 58, 138, 0.2)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+  },
+  subjectGrade: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  subjectName: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#E6EEF8',
+    marginBottom: 4,
+  },
+  subjectType: {
+    fontSize: 14,
+    color: '#A9C3FF',
+    marginBottom: 12,
+  },
+  marksContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  markRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '48%',
+    marginBottom: 8,
+  },
+  markLabel: {
+    fontSize: 14,
+    color: '#A9C3FF',
+  },
+  markValue: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#E6EEF8',
   },
 });
 
