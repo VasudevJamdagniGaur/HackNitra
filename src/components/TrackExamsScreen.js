@@ -11,6 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import ProfileSection from './ProfileSection';
 import { userProfile } from '../data/userProfile';
+import { useAuth } from '../contexts/AuthContext';
 
 const { width } = Dimensions.get('window');
 
@@ -18,6 +19,7 @@ const TrackExamsScreen = ({ onBack, onMenuPress, onLogout }) => {
   const [selectedTab, setSelectedTab] = useState('upcoming');
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [profileVisible, setProfileVisible] = useState(false);
+  const { userProfile: firebaseUserProfile } = useAuth();
 
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: 'home', color: '#4CAF50' },
@@ -68,61 +70,76 @@ const TrackExamsScreen = ({ onBack, onMenuPress, onLogout }) => {
   const upcomingExams = [
     {
       id: 1,
-      subject: 'Data Structures',
-      date: '2024-02-15',
+      subject: 'ST-1',
+      date: '2025-10-14',
       time: '10:00 AM',
-      duration: '3 hours',
-      type: 'Mid-term',
-      room: 'Room 101',
+      duration: '3 days',
+      type: 'Sessional',
+      room: 'Multiple Rooms',
+      endDate: '2025-10-16',
     },
     {
       id: 2,
-      subject: 'Database Management',
-      date: '2024-02-18',
-      time: '2:00 PM',
-      duration: '2 hours',
-      type: 'Quiz',
-      room: 'Room 205',
+      subject: 'Make Up Test 1',
+      date: '2025-10-30',
+      time: '10:00 AM',
+      duration: '3 days',
+      type: 'Make Up',
+      room: 'Multiple Rooms',
+      endDate: '2025-11-01',
     },
     {
       id: 3,
-      subject: 'Computer Networks',
-      date: '2024-02-22',
-      time: '9:00 AM',
-      duration: '3 hours',
-      type: 'Final',
-      room: 'Room 103',
+      subject: 'Practical Assessment 1',
+      date: '2025-11-03',
+      time: '10:00 AM',
+      duration: '5 days',
+      type: 'Practical',
+      room: 'Lab Rooms',
+      endDate: '2025-11-07',
     },
-  ];
-
-  const pastExams = [
     {
       id: 4,
-      subject: 'Mathematics',
-      date: '2024-01-20',
+      subject: 'ST-2',
+      date: '2025-11-24',
       time: '10:00 AM',
-      duration: '2 hours',
-      type: 'Quiz',
-      room: 'Room 201',
-      score: '85/100',
+      duration: '3 days',
+      type: 'Sessional',
+      room: 'Multiple Rooms',
+      endDate: '2025-11-26',
     },
     {
       id: 5,
-      subject: 'Physics',
-      date: '2024-01-15',
-      time: '2:00 PM',
-      duration: '2 hours',
-      type: 'Mid-term',
-      room: 'Room 102',
-      score: '78/100',
+      subject: 'Make Up Test 2',
+      date: '2025-12-04',
+      time: '10:00 AM',
+      duration: '3 days',
+      type: 'Make Up',
+      room: 'Multiple Rooms',
+      endDate: '2025-12-06',
+    },
+    {
+      id: 6,
+      subject: 'Practical Assessment 2',
+      date: '2025-12-08',
+      time: '10:00 AM',
+      duration: '4 days',
+      type: 'Practical',
+      room: 'Lab Rooms',
+      endDate: '2025-12-11',
     },
   ];
+
+  const pastExams = [];
 
   const getExamTypeColor = (type) => {
     switch (type) {
       case 'Final': return '#F44336';
       case 'Mid-term': return '#FF9800';
       case 'Quiz': return '#4CAF50';
+      case 'Sessional': return '#9C27B0';
+      case 'Make Up': return '#FF5722';
+      case 'Practical': return '#00BCD4';
       default: return '#666';
     }
   };
@@ -139,7 +156,9 @@ const TrackExamsScreen = ({ onBack, onMenuPress, onLogout }) => {
       <View style={styles.examDetails}>
         <View style={styles.detailRow}>
           <Ionicons name="calendar" size={16} color="rgba(255, 255, 255, 0.7)" />
-          <Text style={styles.detailText}>{exam.date}</Text>
+          <Text style={styles.detailText}>
+            {exam.endDate ? `${exam.date} - ${exam.endDate}` : exam.date}
+          </Text>
         </View>
         <View style={styles.detailRow}>
           <Ionicons name="time" size={16} color="rgba(255, 255, 255, 0.7)" />
@@ -184,7 +203,7 @@ const TrackExamsScreen = ({ onBack, onMenuPress, onLogout }) => {
               <Ionicons name="person" size={20} color="#fff" />
             </View>
             <View style={styles.profileInfo}>
-              <Text style={styles.profileName}>John Doe</Text>
+              <Text style={styles.profileName}>{(firebaseUserProfile || userProfile).name}</Text>
               <Text style={styles.profileRole}>Student</Text>
             </View>
             <Ionicons name="chevron-down" size={16} color="rgba(255, 255, 255, 0.7)" />
@@ -222,7 +241,15 @@ const TrackExamsScreen = ({ onBack, onMenuPress, onLogout }) => {
         ) : (
           <View>
             <Text style={styles.sectionTitle}>Past Exams</Text>
-            {pastExams.map(renderExamCard)}
+            {pastExams.length > 0 ? (
+              pastExams.map(renderExamCard)
+            ) : (
+              <View style={styles.emptyState}>
+                <Ionicons name="calendar-outline" size={48} color="rgba(255, 255, 255, 0.3)" />
+                <Text style={styles.emptyStateText}>No past exams</Text>
+                <Text style={styles.emptyStateSubtext}>Your completed exams will appear here</Text>
+              </View>
+            )}
           </View>
         )}
       </ScrollView>
@@ -258,7 +285,7 @@ const TrackExamsScreen = ({ onBack, onMenuPress, onLogout }) => {
       <ProfileSection 
         visible={profileVisible}
         onClose={() => setProfileVisible(false)}
-        userProfile={userProfile}
+        userProfile={firebaseUserProfile || userProfile}
         onLogout={handleLogout}
       />
 
@@ -539,6 +566,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     color: '#fff',
+  },
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 60,
+    paddingHorizontal: 20,
+  },
+  emptyStateText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#fff',
+    marginTop: 16,
+    textAlign: 'center',
+  },
+  emptyStateSubtext: {
+    fontSize: 14,
+    color: 'rgba(255, 255, 255, 0.6)',
+    marginTop: 8,
+    textAlign: 'center',
   },
 });
 

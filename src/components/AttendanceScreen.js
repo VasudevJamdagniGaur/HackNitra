@@ -11,6 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import ProfileSection from './ProfileSection';
 import { userProfile } from '../data/userProfile';
+import { useAuth } from '../contexts/AuthContext';
 
 const { width } = Dimensions.get('window');
 
@@ -18,6 +19,7 @@ const AttendanceScreen = ({ onBack, onMenuPress, onLogout }) => {
   const [selectedPeriod, setSelectedPeriod] = useState('monthly');
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [profileVisible, setProfileVisible] = useState(false);
+  const { userProfile: firebaseUserProfile } = useAuth();
 
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: 'home', color: '#4CAF50' },
@@ -148,7 +150,7 @@ const AttendanceScreen = ({ onBack, onMenuPress, onLogout }) => {
               <Ionicons name="person" size={20} color="#fff" />
             </View>
             <View style={styles.profileInfo}>
-              <Text style={styles.profileName}>John Doe</Text>
+              <Text style={styles.profileName}>{(firebaseUserProfile || userProfile).name}</Text>
               <Text style={styles.profileRole}>Student</Text>
             </View>
             <Ionicons name="chevron-down" size={16} color="rgba(255, 255, 255, 0.7)" />
@@ -250,7 +252,7 @@ const AttendanceScreen = ({ onBack, onMenuPress, onLogout }) => {
       <ProfileSection 
         visible={profileVisible}
         onClose={() => setProfileVisible(false)}
-        userProfile={userProfile}
+        userProfile={firebaseUserProfile || userProfile}
         onLogout={handleLogout}
       />
 
