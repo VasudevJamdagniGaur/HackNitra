@@ -14,6 +14,11 @@ import { Ionicons } from '@expo/vector-icons';
 import TrackExamsScreen from './TrackExamsScreen';
 import AttendanceScreen from './AttendanceScreen';
 import NotesScreen from './NotesScreen';
+import HomeworkScreen from './HomeworkScreen';
+import HelpDeskScreen from './HelpDeskScreen';
+import ResultsScreen from './ResultsScreen';
+import AchievementsScreen from './AchievementsScreen';
+import FacultyScreen from './FacultyScreen';
 
 const { width } = Dimensions.get('window');
 
@@ -100,6 +105,26 @@ const Dashboard = () => {
 
   if (currentScreen === 'notes') {
     return <NotesScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+  }
+
+  if (currentScreen === 'homework') {
+    return <HomeworkScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+  }
+
+  if (currentScreen === 'helpDesk') {
+    return <HelpDeskScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+  }
+
+  if (currentScreen === 'results') {
+    return <ResultsScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+  }
+
+  if (currentScreen === 'achievements') {
+    return <AchievementsScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
+  }
+
+  if (currentScreen === 'faculty') {
+    return <FacultyScreen onBack={handleBackToDashboard} onMenuPress={handleMenuPress} />;
   }
 
   // Default dashboard view

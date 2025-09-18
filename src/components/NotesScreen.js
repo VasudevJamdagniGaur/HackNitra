@@ -37,18 +37,24 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
 
   const subjects = [
     { id: 'all', name: 'All Subjects', icon: 'library' },
-    { id: 'ds', name: 'Data Structures', icon: 'code' },
-    { id: 'dbms', name: 'Database Management', icon: 'server' },
-    { id: 'cn', name: 'Computer Networks', icon: 'globe' },
-    { id: 'math', name: 'Mathematics', icon: 'calculator' },
-    { id: 'physics', name: 'Physics', icon: 'nuclear' },
+    { id: 'BOE-312', name: 'BOE-312', icon: 'laser' },
+    { id: 'BAS-301', name: 'BAS-301', icon: 'chatbubbles' },
+    { id: 'BCS-301', name: 'BCS-301', icon: 'code' },
+    { id: 'BCS-302', name: 'BCS-302', icon: 'hardware-chip' },
+    { id: 'BCS-303', name: 'BCS-303', icon: 'calculator' },
+    { id: 'BCC-302', name: 'BCC-302', icon: 'logo-python' },
+    { id: 'BCS-351', name: 'BCS-351', icon: 'code-slash' },
+    { id: 'BCS-352', name: 'BCS-352', icon: 'desktop' },
+    { id: 'BCS-353', name: 'BCS-353', icon: 'globe' },
+    { id: 'BCC-351', name: 'BCC-351', icon: 'briefcase' },
   ];
 
   const notes = [
     {
       id: 1,
-      subject: 'Data Structures',
-      title: 'Binary Trees - Complete Guide',
+      subject: 'BOE-312',
+      subjectName: 'Laser System & Application',
+      title: 'Laser Principles and Applications',
       type: 'PDF',
       size: '2.4 MB',
       date: '2024-02-10',
@@ -56,8 +62,9 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
     },
     {
       id: 2,
-      subject: 'Database Management',
-      title: 'SQL Queries and Optimization',
+      subject: 'BAS-301',
+      subjectName: 'Tech Communication',
+      title: 'Technical Writing Guidelines',
       type: 'PDF',
       size: '1.8 MB',
       date: '2024-02-08',
@@ -65,8 +72,9 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
     },
     {
       id: 3,
-      subject: 'Computer Networks',
-      title: 'OSI Model Layers Explained',
+      subject: 'BCS-301',
+      subjectName: 'Data Structures',
+      title: 'Binary Trees - Complete Guide',
       type: 'PDF',
       size: '3.1 MB',
       date: '2024-02-05',
@@ -74,8 +82,9 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
     },
     {
       id: 4,
-      subject: 'Mathematics',
-      title: 'Calculus Integration Techniques',
+      subject: 'BCS-302',
+      subjectName: 'COA',
+      title: 'Computer Organization Architecture',
       type: 'PDF',
       size: '2.7 MB',
       date: '2024-02-03',
@@ -83,12 +92,63 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
     },
     {
       id: 5,
-      subject: 'Physics',
-      title: 'Quantum Mechanics Basics',
+      subject: 'BCS-303',
+      subjectName: 'Discrete Structures',
+      title: 'Discrete Mathematics Fundamentals',
       type: 'PDF',
       size: '4.2 MB',
       date: '2024-02-01',
       downloads: 25,
+    },
+    {
+      id: 6,
+      subject: 'BCC-302',
+      subjectName: 'Python Programming',
+      title: 'Python Advanced Concepts',
+      type: 'PDF',
+      size: '3.5 MB',
+      date: '2024-01-28',
+      downloads: 42,
+    },
+    {
+      id: 7,
+      subject: 'BCS-351',
+      subjectName: 'Data Structure Lab',
+      title: 'Lab Manual - Data Structures',
+      type: 'PDF',
+      size: '2.1 MB',
+      date: '2024-01-25',
+      downloads: 35,
+    },
+    {
+      id: 8,
+      subject: 'BCS-352',
+      subjectName: 'COA Lab',
+      title: 'Computer Organization Lab Guide',
+      type: 'PDF',
+      size: '2.8 MB',
+      date: '2024-01-22',
+      downloads: 29,
+    },
+    {
+      id: 9,
+      subject: 'BCS-353',
+      subjectName: 'WD Workshop',
+      title: 'Web Development Workshop Notes',
+      type: 'PDF',
+      size: '3.2 MB',
+      date: '2024-01-20',
+      downloads: 33,
+    },
+    {
+      id: 10,
+      subject: 'BCC-351',
+      subjectName: 'Mini Project or Internship',
+      title: 'Project Guidelines and Templates',
+      type: 'PDF',
+      size: '2.9 MB',
+      date: '2024-01-18',
+      downloads: 27,
     },
   ];
 
@@ -166,7 +226,8 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
                 </View>
                 <View style={styles.noteInfo}>
                   <Text style={styles.noteTitle}>{note.title}</Text>
-                  <Text style={styles.noteSubject}>{note.subject}</Text>
+                  <Text style={styles.noteSubjectCode}>{note.subject}</Text>
+                  <Text style={styles.noteSubjectName}>{note.subjectName}</Text>
                 </View>
                 <TouchableOpacity 
                   style={styles.downloadButton}
@@ -324,7 +385,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: 4,
   },
-  noteSubject: {
+  noteSubjectCode: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#4CAF50',
+    marginBottom: 2,
+  },
+  noteSubjectName: {
     fontSize: 14,
     color: 'rgba(255, 255, 255, 0.7)',
   },
