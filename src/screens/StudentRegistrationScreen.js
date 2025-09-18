@@ -68,10 +68,11 @@ export default function StudentRegistrationScreen({ navigation }) {
           <Text style={styles.formTitle}>Enter your details</Text>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="person" size={20} color="#666" style={styles.inputIcon} />
+            <Ionicons name="person" size={20} color="rgba(255, 255, 255, 0.7)" style={styles.inputIcon} />
             <TextInput
               style={styles.input}
               placeholder="Full Name"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
               value={name}
               onChangeText={setName}
               autoCapitalize="words"
@@ -79,10 +80,11 @@ export default function StudentRegistrationScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="school" size={20} color="#666" style={styles.inputIcon} />
+            <Ionicons name="school" size={20} color="rgba(255, 255, 255, 0.7)" style={styles.inputIcon} />
             <TextInput
               style={styles.input}
               placeholder="College Name"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
               value={college}
               onChangeText={setCollege}
               autoCapitalize="words"
@@ -90,10 +92,11 @@ export default function StudentRegistrationScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="mail" size={20} color="#666" style={styles.inputIcon} />
+            <Ionicons name="mail" size={20} color="rgba(255, 255, 255, 0.7)" style={styles.inputIcon} />
             <TextInput
               style={styles.input}
               placeholder="Email ID"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
               value={email}
               onChangeText={setEmail}
               keyboardType="email-address"
@@ -184,21 +187,30 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8f8f8',
-    borderRadius: 10,
-    marginBottom: 15,
-    paddingHorizontal: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 16,
+    marginBottom: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 4,
     borderWidth: 1,
-    borderColor: '#E0E0E0',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   inputIcon: {
-    marginRight: 10,
+    marginRight: 16,
   },
   input: {
     flex: 1,
-    paddingVertical: 15,
+    paddingVertical: 16,
     fontSize: 16,
-    color: '#333',
+    color: '#fff',
   },
   courseTitle: {
     fontSize: 18,
