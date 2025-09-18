@@ -1,8 +1,8 @@
 export const userProfile = {
-  name: 'John Doe',
-  course: 'B.Tech (CSE)',
-  rollNo: '2024CS001',
-  college: 'NIT Raipur',
-  year: '1st Year',
-  section: 'A',
+  name: 'Vasudev',
+  course: 'B.Tech (AI&ML)',
+  rollNo: '2408021530069',
+  college: 'Nitra Technical Campus, Ghaziabad',
+  year: '2nd Year',
+  section: 'C',
 };
