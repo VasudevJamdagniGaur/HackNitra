@@ -16,6 +16,7 @@ const StudentSignup = ({ onBack, onComplete }) => {
     name: '',
     college: '',
     email: '',
+    rollNumber: '',
     course: '',
     section: '',
     year: '',
@@ -27,12 +28,16 @@ const StudentSignup = ({ onBack, onComplete }) => {
 
   const handleNext = () => {
     if (step === 1) {
-      if (!formData.name || !formData.college || !formData.email) {
+      if (!formData.name || !formData.college || !formData.email || !formData.rollNumber) {
         Alert.alert('Error', 'Please fill in all fields');
         return;
       }
       if (!formData.email.includes('@') || !formData.email.includes('.')) {
         Alert.alert('Error', 'Please enter a valid email address');
+        return;
+      }
+      if (formData.rollNumber.length < 3) {
+        Alert.alert('Error', 'Please enter a valid roll number');
         return;
       }
       setStep(2);
@@ -93,6 +98,18 @@ const StudentSignup = ({ onBack, onComplete }) => {
           placeholderTextColor="rgba(255, 255, 255, 0.5)"
           value={formData.college}
           onChangeText={(value) => updateFormData('college', value)}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Ionicons name="card" size={20} color="rgba(255, 255, 255, 0.7)" style={styles.inputIcon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Roll Number"
+          placeholderTextColor="rgba(255, 255, 255, 0.5)"
+          value={formData.rollNumber}
+          onChangeText={(value) => updateFormData('rollNumber', value)}
+          autoCapitalize="characters"
         />
       </View>
 
