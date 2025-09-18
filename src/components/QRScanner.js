@@ -299,9 +299,19 @@ const styles = StyleSheet.create({
   },
   retryButton: {
     backgroundColor: '#4CAF50',
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    borderRadius: 25,
+    paddingHorizontal: 32,
+    paddingVertical: 16,
+    borderRadius: 16,
+    maxWidth: 200,
+    alignSelf: 'center',
+    shadowColor: '#4CAF50',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
   retryButtonText: {
     color: '#fff',

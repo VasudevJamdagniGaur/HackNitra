@@ -245,17 +245,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 15,
-    borderRadius: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    borderRadius: 16,
+    maxWidth: 280,
+    alignSelf: 'center',
+    shadowColor: '#4CAF50',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
   submitButtonDisabled: {
     backgroundColor: 'rgba(76, 175, 80, 0.5)',
+    shadowOpacity: 0.1,
   },
   submitButtonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 12,
   },
 });
 

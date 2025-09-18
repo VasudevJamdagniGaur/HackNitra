@@ -31,16 +31,25 @@ const ProfileButton = ({ onPress, userName = 'John Doe', userRole = 'Student' })
 const styles = StyleSheet.create({
   profileButton: {
     padding: 8,
+    borderRadius: 8,
   },
   profileContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 25,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.2)',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   profileIcon: {
     width: 32,
