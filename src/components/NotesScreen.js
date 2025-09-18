@@ -36,17 +36,17 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
   };
 
   const subjects = [
-    { id: 'all', name: 'All Subjects', icon: 'library' },
-    { id: 'BOE-312', name: 'BOE-312', icon: 'laser' },
-    { id: 'BAS-301', name: 'BAS-301', icon: 'chatbubbles' },
-    { id: 'BCS-301', name: 'BCS-301', icon: 'code' },
-    { id: 'BCS-302', name: 'BCS-302', icon: 'hardware-chip' },
-    { id: 'BCS-303', name: 'BCS-303', icon: 'calculator' },
-    { id: 'BCC-302', name: 'BCC-302', icon: 'logo-python' },
-    { id: 'BCS-351', name: 'BCS-351', icon: 'code-slash' },
-    { id: 'BCS-352', name: 'BCS-352', icon: 'desktop' },
-    { id: 'BCS-353', name: 'BCS-353', icon: 'globe' },
-    { id: 'BCC-351', name: 'BCC-351', icon: 'briefcase' },
+    { id: 'all', code: 'All', name: 'All Subjects', icon: 'library' },
+    { id: 'BOE-312', code: 'BOE-312', name: 'Laser System & Application', icon: 'laser' },
+    { id: 'BAS-301', code: 'BAS-301', name: 'Tech Communication', icon: 'chatbubbles' },
+    { id: 'BCS-301', code: 'BCS-301', name: 'Data Structures', icon: 'code' },
+    { id: 'BCS-302', code: 'BCS-302', name: 'Discrete Structure', icon: 'hardware-chip' },
+    { id: 'BCS-303', code: 'BCS-303', name: 'Discrete Structures', icon: 'calculator' },
+    { id: 'BCC-302', code: 'BCC-302', name: 'Python Prog', icon: 'logo-python' },
+    { id: 'BCS-351', code: 'BCS-351', name: 'Data Structure', icon: 'code-slash' },
+    { id: 'BCS-352', code: 'BCS-352', name: 'COA Lab', icon: 'desktop' },
+    { id: 'BCS-353', code: 'BCS-353', name: 'WD Workshop', icon: 'globe' },
+    { id: 'BCC-351', code: 'BCC-351', name: 'Mini Project', icon: 'briefcase' },
   ];
 
   const notes = [
@@ -200,17 +200,27 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
             ]}
             onPress={() => setSelectedSubject(subject.id)}
           >
-            <Ionicons 
-              name={subject.icon} 
-              size={20} 
-              color={selectedSubject === subject.id ? '#fff' : 'rgba(255, 255, 255, 0.7)'} 
-            />
-            <Text style={[
-              styles.subjectButtonText,
-              selectedSubject === subject.id && styles.selectedSubjectButtonText
-            ]}>
-              {subject.name}
-            </Text>
+            <View style={styles.subjectIconContainer}>
+              <Ionicons 
+                name={subject.icon} 
+                size={20} 
+                color={selectedSubject === subject.id ? '#0F254D' : '#A9C3FF'} 
+              />
+            </View>
+            <View style={styles.subjectTextContainer}>
+              <Text style={[
+                styles.subjectCode,
+                selectedSubject === subject.id && styles.selectedSubjectCode
+              ]}>
+                {subject.code}
+              </Text>
+              <Text style={[
+                styles.subjectName,
+                selectedSubject === subject.id && styles.selectedSubjectName
+              ]}>
+                {subject.name}
+              </Text>
+            </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -343,24 +353,58 @@ const styles = StyleSheet.create({
   subjectButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 20,
+    backgroundColor: '#0F1724',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderColor: 'rgba(255, 255, 255, 0.06)',
+    width: 120,
+    height: 80,
+    marginRight: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   selectedSubjectButton: {
-    backgroundColor: '#FACC15',
-    borderColor: '#0F254D',
+    backgroundColor: '#0F1724',
+    borderWidth: 2,
+    borderColor: '#E91E63',
+    shadowColor: '#E91E63',
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 4,
   },
-  subjectButtonText: {
-    fontSize: 14,
+  subjectIconContainer: {
+    marginRight: 8,
+  },
+  subjectTextContainer: {
+    flex: 1,
+  },
+  subjectCode: {
+    fontSize: 12,
     color: '#A9C3FF',
-    marginLeft: 8,
+    fontWeight: '500',
+    marginBottom: 2,
   },
-  selectedSubjectButtonText: {
-    color: '#0F254D',
+  selectedSubjectCode: {
+    color: '#E91E63',
+    fontWeight: '600',
+  },
+  subjectName: {
+    fontSize: 11,
+    color: '#E6EEF8',
+    fontWeight: '600',
+    lineHeight: 14,
+  },
+  selectedSubjectName: {
+    color: '#E6EEF8',
+    fontWeight: '700',
   },
   content: {
     flex: 1,
