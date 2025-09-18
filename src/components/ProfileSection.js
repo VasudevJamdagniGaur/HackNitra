@@ -24,7 +24,7 @@ const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
       
       <View style={styles.profileContent}>
         <View style={styles.profileAvatar}>
-          <Ionicons name="person" size={60} color="#fff" />
+          <Ionicons name="person" size={70} color="#fff" />
         </View>
         
         <View style={styles.profileDetails}>
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
   profileSection: {
     position: 'absolute',
     top: 0,
+    left: 0,
     right: 0,
-    width: width * 0.85,
+    bottom: 0,
+    width: '100%',
     height: '100%',
-    backgroundColor: '#16213e',
+    backgroundColor: '#1a1a2e',
     zIndex: 1000,
-    borderLeftWidth: 1,
-    borderLeftColor: 'rgba(255, 255, 255, 0.1)',
   },
   profileHeader: {
     flexDirection: 'row',
@@ -107,8 +107,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 20,
     paddingTop: 60,
+    paddingBottom: 20,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   profileTitle: {
     fontSize: 20,
@@ -118,18 +120,27 @@ const styles = StyleSheet.create({
   profileContent: {
     flex: 1,
     padding: 20,
+    paddingTop: 30,
   },
   profileAvatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 140,
+    height: 140,
+    borderRadius: 70,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginBottom: 30,
-    borderWidth: 3,
+    marginBottom: 40,
+    borderWidth: 4,
     borderColor: '#4CAF50',
+    shadowColor: '#4CAF50',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
   profileDetails: {
     gap: 20,
@@ -138,10 +149,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 12,
-    padding: 15,
+    borderRadius: 16,
+    padding: 20,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   profileItemInfo: {
     marginLeft: 15,
