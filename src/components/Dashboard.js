@@ -20,21 +20,17 @@ import ResultsScreen from './ResultsScreen';
 import AchievementsScreen from './AchievementsScreen';
 import FacultyScreen from './FacultyScreen';
 
+// Import shared components
+import ProfileButton from './ProfileButton';
+import ProfileSection from './ProfileSection';
+import { userProfile } from '../data/userProfile';
+
 const { width } = Dimensions.get('window');
 
 const Dashboard = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [currentScreen, setCurrentScreen] = useState('dashboard');
   const [profileVisible, setProfileVisible] = useState(false);
-
-  const userProfile = {
-    name: 'John Doe',
-    course: 'B.Tech (CSE)',
-    rollNo: '2024CS001',
-    college: 'NIT Raipur',
-    year: '1st Year',
-    section: 'A',
-  };
 
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: 'home', color: '#4CAF50' },
@@ -92,8 +88,6 @@ const Dashboard = () => {
   };
 
   const handleProfilePress = () => {
-    console.log('Profile button pressed!');
-    Alert.alert('Profile', 'Profile button clicked!');
     setProfileVisible(true);
   };
 
@@ -156,22 +150,11 @@ const Dashboard = () => {
           <Text style={styles.title}>Edutrack</Text>
         </View>
         
-        <TouchableOpacity 
-          style={styles.profileButton} 
+        <ProfileButton 
           onPress={handleProfilePress}
-          activeOpacity={0.7}
-        >
-          <View style={styles.profileContainer}>
-            <View style={styles.profileIcon}>
-              <Ionicons name="person" size={20} color="#fff" />
-            </View>
-            <View style={styles.profileInfo}>
-              <Text style={styles.profileName}>John Doe</Text>
-              <Text style={styles.profileRole}>Student</Text>
-            </View>
-            <Ionicons name="chevron-down" size={16} color="rgba(255, 255, 255, 0.7)" />
-          </View>
-        </TouchableOpacity>
+          userName={userProfile.name}
+          userRole="Student"
+        />
       </View>
 
       {/* Sidebar */}
@@ -207,7 +190,6 @@ const Dashboard = () => {
                 <View style={styles.welcomeSection}>
                   <Text style={styles.welcomeTitle}>Welcome back!</Text>
                   <Text style={styles.welcomeSubtitle}>Here's what's happening today</Text>
-                  <Text style={styles.debugText}>Profile Visible: {profileVisible ? 'YES' : 'NO'}</Text>
                 </View>
 
         {/* Notice Board */}
@@ -267,75 +249,11 @@ const Dashboard = () => {
       </ScrollView>
 
       {/* Profile Section */}
-      {profileVisible && (
-        <View style={styles.profileSection}>
-          <View style={styles.profileHeader}>
-            <Text style={styles.profileTitle}>Profile</Text>
-            <TouchableOpacity onPress={() => setProfileVisible(false)}>
-              <Ionicons name="close" size={24} color="#fff" />
-            </TouchableOpacity>
-          </View>
-          
-          <View style={styles.profileContent}>
-            <View style={styles.profileAvatar}>
-              <Ionicons name="person" size={60} color="#fff" />
-            </View>
-            
-            <View style={styles.profileDetails}>
-              <View style={styles.profileItem}>
-                <Ionicons name="person" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Name</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.name}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="book" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Course</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.course}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="card" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Roll No.</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.rollNo}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="school" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>College</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.college}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="calendar" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Year</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.year}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="people" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Section</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.section}</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      )}
-
-      {/* Debug Info */}
-      {profileVisible && console.log('Profile section is rendering')}
+      <ProfileSection 
+        visible={profileVisible}
+        onClose={() => setProfileVisible(false)}
+        userProfile={userProfile}
+      />
 
       {/* Overlay */}
       {(sidebarVisible || profileVisible) && (
@@ -480,11 +398,6 @@ const styles = StyleSheet.create({
   welcomeSubtitle: {
     fontSize: 16,
     color: 'rgba(255, 255, 255, 0.7)',
-  },
-  debugText: {
-    fontSize: 14,
-    color: '#4CAF50',
-    marginTop: 10,
   },
   section: {
     marginBottom: 25,

@@ -15,6 +15,16 @@ const { width } = Dimensions.get('window');
 const TrackExamsScreen = ({ onBack, onMenuPress }) => {
   const [selectedTab, setSelectedTab] = useState('upcoming');
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [profileVisible, setProfileVisible] = useState(false);
+
+  const userProfile = {
+    name: 'John Doe',
+    course: 'B.Tech (CSE)',
+    rollNo: '2024CS001',
+    college: 'NIT Raipur',
+    year: '1st Year',
+    section: 'A',
+  };
 
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: 'home', color: '#4CAF50' },
@@ -33,6 +43,10 @@ const TrackExamsScreen = ({ onBack, onMenuPress }) => {
     if (onMenuPress) {
       onMenuPress(item);
     }
+  };
+
+  const handleProfilePress = () => {
+    setProfileVisible(true);
   };
 
   const upcomingExams = [
@@ -137,14 +151,29 @@ const TrackExamsScreen = ({ onBack, onMenuPress }) => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.menuButton}
           onPress={() => setSidebarVisible(true)}
         >
           <Ionicons name="menu" size={24} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.title}>Track Exams</Text>
-        <View style={styles.placeholder} />
+        <TouchableOpacity 
+          style={styles.profileButton} 
+          onPress={handleProfilePress}
+          activeOpacity={0.7}
+        >
+          <View style={styles.profileContainer}>
+            <View style={styles.profileIcon}>
+              <Ionicons name="person" size={20} color="#fff" />
+            </View>
+            <View style={styles.profileInfo}>
+              <Text style={styles.profileName}>John Doe</Text>
+              <Text style={styles.profileRole}>Student</Text>
+            </View>
+            <Ionicons name="chevron-down" size={16} color="rgba(255, 255, 255, 0.7)" />
+          </View>
+        </TouchableOpacity>
       </View>
 
       {/* Tabs */}
@@ -209,11 +238,82 @@ const TrackExamsScreen = ({ onBack, onMenuPress }) => {
         </View>
       )}
 
+      {/* Profile Section */}
+      {profileVisible && (
+        <View style={styles.profileSection}>
+          <View style={styles.profileHeader}>
+            <Text style={styles.profileTitle}>Profile</Text>
+            <TouchableOpacity onPress={() => setProfileVisible(false)}>
+              <Ionicons name="close" size={24} color="#fff" />
+            </TouchableOpacity>
+          </View>
+          
+          <View style={styles.profileContent}>
+            <View style={styles.profileAvatar}>
+              <Ionicons name="person" size={60} color="#fff" />
+            </View>
+            
+            <View style={styles.profileDetails}>
+              <View style={styles.profileItem}>
+                <Ionicons name="person" size={20} color="#4CAF50" />
+                <View style={styles.profileItemInfo}>
+                  <Text style={styles.profileItemLabel}>Name</Text>
+                  <Text style={styles.profileItemValue}>{userProfile.name}</Text>
+                </View>
+              </View>
+              
+              <View style={styles.profileItem}>
+                <Ionicons name="book" size={20} color="#4CAF50" />
+                <View style={styles.profileItemInfo}>
+                  <Text style={styles.profileItemLabel}>Course</Text>
+                  <Text style={styles.profileItemValue}>{userProfile.course}</Text>
+                </View>
+              </View>
+              
+              <View style={styles.profileItem}>
+                <Ionicons name="card" size={20} color="#4CAF50" />
+                <View style={styles.profileItemInfo}>
+                  <Text style={styles.profileItemLabel}>Roll No.</Text>
+                  <Text style={styles.profileItemValue}>{userProfile.rollNo}</Text>
+                </View>
+              </View>
+              
+              <View style={styles.profileItem}>
+                <Ionicons name="school" size={20} color="#4CAF50" />
+                <View style={styles.profileItemInfo}>
+                  <Text style={styles.profileItemLabel}>College</Text>
+                  <Text style={styles.profileItemValue}>{userProfile.college}</Text>
+                </View>
+              </View>
+              
+              <View style={styles.profileItem}>
+                <Ionicons name="calendar" size={20} color="#4CAF50" />
+                <View style={styles.profileItemInfo}>
+                  <Text style={styles.profileItemLabel}>Year</Text>
+                  <Text style={styles.profileItemValue}>{userProfile.year}</Text>
+                </View>
+              </View>
+              
+              <View style={styles.profileItem}>
+                <Ionicons name="people" size={20} color="#4CAF50" />
+                <View style={styles.profileItemInfo}>
+                  <Text style={styles.profileItemLabel}>Section</Text>
+                  <Text style={styles.profileItemValue}>{userProfile.section}</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      )}
+
       {/* Overlay */}
-      {sidebarVisible && (
+      {(sidebarVisible || profileVisible) && (
         <TouchableOpacity
           style={styles.overlay}
-          onPress={() => setSidebarVisible(false)}
+          onPress={() => {
+            setSidebarVisible(false);
+            setProfileVisible(false);
+          }}
         />
       )}
     </View>
@@ -381,6 +481,108 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'rgba(0,0,0,0.5)',
     zIndex: 999,
+  },
+  profileButton: {
+    padding: 8,
+  },
+  profileContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 25,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+  },
+  profileIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  profileInfo: {
+    marginRight: 8,
+  },
+  profileName: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 2,
+  },
+  profileRole: {
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.7)',
+  },
+  profileSection: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: width * 0.85,
+    height: '100%',
+    backgroundColor: '#16213e',
+    zIndex: 1000,
+    borderLeftWidth: 1,
+    borderLeftColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  profileHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 20,
+    paddingTop: 60,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  profileTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  profileContent: {
+    flex: 1,
+    padding: 20,
+  },
+  profileAvatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginBottom: 30,
+    borderWidth: 3,
+    borderColor: '#4CAF50',
+  },
+  profileDetails: {
+    gap: 20,
+  },
+  profileItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 12,
+    padding: 15,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  profileItemInfo: {
+    marginLeft: 15,
+    flex: 1,
+  },
+  profileItemLabel: {
+    fontSize: 14,
+    color: 'rgba(255, 255, 255, 0.7)',
+    marginBottom: 5,
+  },
+  profileItemValue: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#fff',
   },
 });
 
