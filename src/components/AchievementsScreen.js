@@ -36,86 +36,10 @@ const AchievementsScreen = ({ onBack, onMenuPress }) => {
   };
 
   const achievements = {
-    all: [
-      {
-        id: 1,
-        title: 'Academic Excellence Award',
-        description: 'Top performer in Data Structures course',
-        date: '2024-01-15',
-        type: 'academic',
-        category: 'award',
-      },
-      {
-        id: 2,
-        title: 'Hackathon Winner',
-        description: 'First place in college coding competition',
-        date: '2024-01-10',
-        type: 'competition',
-        category: 'award',
-      },
-      {
-        id: 3,
-        title: 'Project Showcase',
-        description: 'Featured project in college exhibition',
-        date: '2024-01-05',
-        type: 'project',
-        category: 'recognition',
-      },
-    ],
-    photos: [
-      {
-        id: 4,
-        title: 'Award Ceremony',
-        description: 'Receiving academic excellence award',
-        date: '2024-01-15',
-        type: 'photo',
-        category: 'award',
-      },
-      {
-        id: 5,
-        title: 'Hackathon Team',
-        description: 'Team photo after winning competition',
-        date: '2024-01-10',
-        type: 'photo',
-        category: 'competition',
-      },
-    ],
-    videos: [
-      {
-        id: 6,
-        title: 'Project Demo',
-        description: 'Video demonstration of final project',
-        date: '2024-01-05',
-        type: 'video',
-        category: 'project',
-      },
-      {
-        id: 7,
-        title: 'Presentation',
-        description: 'Conference presentation recording',
-        date: '2024-01-01',
-        type: 'video',
-        category: 'presentation',
-      },
-    ],
-    documents: [
-      {
-        id: 8,
-        title: 'Certificate of Excellence',
-        description: 'Official certificate for academic achievement',
-        date: '2024-01-15',
-        type: 'document',
-        category: 'certificate',
-      },
-      {
-        id: 9,
-        title: 'Recommendation Letter',
-        description: 'Letter from professor for internship',
-        date: '2024-01-12',
-        type: 'document',
-        category: 'recommendation',
-      },
-    ],
+    all: [],
+    photos: [],
+    videos: [],
+    documents: [],
   };
 
   const tabs = [
