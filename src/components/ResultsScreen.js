@@ -47,8 +47,8 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
   ];
 
   const getResultsData = (semesterId) => {
-    // Only show data for semesters 1 and 2
-    if (semesterId > 2) {
+    // Only show data for semester 1
+    if (semesterId > 1) {
       return null;
     }
     
@@ -66,16 +66,6 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
           { code: 'BCS151', name: 'Programming for Problem Solving Lab', type: 'Practical', sessional1: 30, sessional2: 30, external: 0, practical: 0, grade: 'B-' },
           { code: 'BCE151', name: 'Engineering Graphics & Design Lab', type: 'Practical', sessional1: 30, sessional2: 47, external: 0, practical: 0, grade: 'B+' },
         ]
-      };
-    }
-    
-    // Semester 2 - keeping original format for now
-    if (semesterId === 2) {
-      return {
-        sessional1: { marks: 85, maxMarks: 100, grade: 'A' },
-        sessional2: { marks: 78, maxMarks: 100, grade: 'B+' },
-        external: { marks: 82, maxMarks: 100, grade: 'A-' },
-        practicals: { marks: 90, maxMarks: 100, grade: 'A' },
       };
     }
     
@@ -106,7 +96,6 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
         <Text style={styles.semesterName}>{semester.name}</Text>
         <Ionicons name="chevron-forward" size={20} color="rgba(255, 255, 255, 0.7)" />
       </View>
-      <Text style={styles.semesterSubjects}>{semester.subjects.length} Subjects</Text>
     </TouchableOpacity>
   );
 
@@ -134,6 +123,17 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
               {results.subjects ? (
                 // New subject-based layout for Semester 1
                 <View style={styles.subjectsContainer}>
+                  {/* SGPA Section - Prominent Display */}
+                  <View style={styles.sgpaContainer}>
+                    <View style={styles.sgpaHeader}>
+                      <Ionicons name="trophy" size={24} color="#FACC15" />
+                      <Text style={styles.sgpaTitle}>SGPA</Text>
+                    </View>
+                    <Text style={styles.sgpaValue}>5.0</Text>
+                    <Text style={styles.sgpaSubtext}>Semester Grade Point Average</Text>
+                  </View>
+
+                  {/* Subjects List */}
                   {results.subjects.map((subject, index) => (
                     <View key={index} style={styles.subjectCard}>
                       <View style={styles.subjectHeader}>
@@ -165,50 +165,7 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
                     </View>
                   ))}
                 </View>
-              ) : (
-                // Original grid layout for other semesters
-                <View style={styles.resultsGrid}>
-                  <View style={styles.resultCard}>
-                    <Text style={styles.resultLabel}>Sessional 1</Text>
-                    <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional1.grade) }]}>
-                      {results.sessional1.marks}/{results.sessional1.maxMarks}
-                    </Text>
-                    <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional1.grade) }]}>
-                      {results.sessional1.grade}
-                    </Text>
-                  </View>
-
-                  <View style={styles.resultCard}>
-                    <Text style={styles.resultLabel}>Sessional 2</Text>
-                    <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional2.grade) }]}>
-                      {results.sessional2.marks}/{results.sessional2.maxMarks}
-                    </Text>
-                    <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional2.grade) }]}>
-                      {results.sessional2.grade}
-                    </Text>
-                  </View>
-
-                  <View style={styles.resultCard}>
-                    <Text style={styles.resultLabel}>External</Text>
-                    <Text style={[styles.resultMarks, { color: getGradeColor(results.external.grade) }]}>
-                      {results.external.marks}/{results.external.maxMarks}
-                    </Text>
-                    <Text style={[styles.resultGrade, { color: getGradeColor(results.external.grade) }]}>
-                      {results.external.grade}
-                    </Text>
-                  </View>
-
-                  <View style={styles.resultCard}>
-                    <Text style={styles.resultLabel}>Practicals</Text>
-                    <Text style={[styles.resultMarks, { color: getGradeColor(results.practicals.grade) }]}>
-                      {results.practicals.marks}/{results.practicals.maxMarks}
-                    </Text>
-                    <Text style={[styles.resultGrade, { color: getGradeColor(results.practicals.grade) }]}>
-                      {results.practicals.grade}
-                    </Text>
-                  </View>
-                </View>
-              )}
+              ) : null}
 
               {/* Teacher Remarks Section */}
               <View style={styles.remarksSection}>
@@ -365,10 +322,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#E6EEF8',
-  },
-  semesterSubjects: {
-    fontSize: 14,
-    color: '#A9C3FF',
   },
   resultsDetailContainer: {
     flex: 1,
@@ -587,6 +540,45 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     color: '#E6EEF8',
+  },
+  sgpaContainer: {
+    backgroundColor: '#0F1724',
+    borderRadius: 16,
+    padding: 24,
+    marginBottom: 20,
+    borderWidth: 2,
+    borderColor: '#FACC15',
+    alignItems: 'center',
+    shadowColor: '#FACC15',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  sgpaHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  sgpaTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#FACC15',
+    marginLeft: 8,
+  },
+  sgpaValue: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: '#FACC15',
+    marginBottom: 8,
+  },
+  sgpaSubtext: {
+    fontSize: 16,
+    color: '#A9C3FF',
+    textAlign: 'center',
   },
 });
 
