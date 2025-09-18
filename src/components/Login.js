@@ -106,7 +106,7 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
       {/* Footer */}
       <View style={styles.footer}>
         <TouchableOpacity style={styles.signupButton} onPress={onSignUp}>
-          <Text style={styles.signupButtonText}>Sign Up</Text>
+          <Text style={styles.signupButtonText}>Create Account</Text>
           <Ionicons name="person-add" size={20} color="#fff" />
         </TouchableOpacity>
         
