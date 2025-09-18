@@ -153,7 +153,7 @@ const FacultyScreen = ({ onBack, onMenuPress }) => {
           style={styles.contactButton}
           onPress={() => handleContactPress(faculty)}
         >
-          <Ionicons name="call" size={20} color="#4CAF50" />
+          <Ionicons name="mail" size={20} color="#4CAF50" />
         </TouchableOpacity>
       </View>
       
@@ -288,9 +288,17 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   contactButton: {
-    padding: 8,
+    padding: 12,
     backgroundColor: 'rgba(76, 175, 80, 0.2)',
-    borderRadius: 8,
+    borderRadius: 12,
+    shadowColor: '#4CAF50',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   subjectName: {
     fontSize: 18,
