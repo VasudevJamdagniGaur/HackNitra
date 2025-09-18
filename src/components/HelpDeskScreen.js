@@ -170,24 +170,6 @@ const HelpDeskScreen = ({ onBack, onMenuPress }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Contact Info */}
-        <View style={styles.contactSection}>
-          <Text style={styles.contactTitle}>Contact Information</Text>
-          <View style={styles.contactItem}>
-            <Ionicons name="mail" size={20} color="#4CAF50" />
-            <View style={styles.contactDetails}>
-              <Text style={styles.contactLabel}>Complaints</Text>
-              <Text style={styles.contactValue}>nitra@complain.ac.in</Text>
-            </View>
-          </View>
-          <View style={styles.contactItem}>
-            <Ionicons name="mail" size={20} color="#FF9800" />
-            <View style={styles.contactDetails}>
-              <Text style={styles.contactLabel}>Suggestions</Text>
-              <Text style={styles.contactValue}>nitra@suggestion.ac.in</Text>
-            </View>
-          </View>
-        </View>
       </ScrollView>
 
       {/* Sidebar */}
@@ -335,42 +317,6 @@ const styles = StyleSheet.create({
     color: '#4CAF50',
     fontSize: 14,
     marginLeft: 8,
-  },
-  contactSection: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 15,
-    padding: 20,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-  },
-  contactTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  contactItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
-  },
-  contactDetails: {
-    marginLeft: 15,
-    flex: 1,
-  },
-  contactLabel: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
-    marginBottom: 5,
-  },
-  contactValue: {
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: '500',
   },
   sidebar: {
     position: 'absolute',
