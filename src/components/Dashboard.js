@@ -91,6 +91,29 @@ const Dashboard = () => {
     setProfileVisible(true);
   };
 
+  const handleLogout = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: () => {
+            // Here you would typically clear user data, tokens, etc.
+            // For now, we'll just show a success message
+            Alert.alert('Success', 'Logged out successfully!');
+            setProfileVisible(false);
+          },
+        },
+      ]
+    );
+  };
+
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'high': return '#F44336';
@@ -253,6 +276,7 @@ const Dashboard = () => {
         visible={profileVisible}
         onClose={() => setProfileVisible(false)}
         userProfile={userProfile}
+        onLogout={handleLogout}
       />
 
       {/* Overlay */}

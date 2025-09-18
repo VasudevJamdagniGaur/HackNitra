@@ -9,6 +9,8 @@ import {
   Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import ProfileSection from './ProfileSection';
+import { userProfile } from '../data/userProfile';
 
 const { width } = Dimensions.get('window');
 
@@ -16,15 +18,6 @@ const AttendanceScreen = ({ onBack, onMenuPress }) => {
   const [selectedPeriod, setSelectedPeriod] = useState('monthly');
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [profileVisible, setProfileVisible] = useState(false);
-
-  const userProfile = {
-    name: 'John Doe',
-    course: 'B.Tech (CSE)',
-    rollNo: '2024CS001',
-    college: 'NIT Raipur',
-    year: '1st Year',
-    section: 'A',
-  };
 
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: 'home', color: '#4CAF50' },
@@ -47,6 +40,27 @@ const AttendanceScreen = ({ onBack, onMenuPress }) => {
 
   const handleProfilePress = () => {
     setProfileVisible(true);
+  };
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: () => {
+            Alert.alert('Success', 'Logged out successfully!');
+            setProfileVisible(false);
+          },
+        },
+      ]
+    );
   };
 
   const attendanceData = {
@@ -231,72 +245,12 @@ const AttendanceScreen = ({ onBack, onMenuPress }) => {
       )}
 
       {/* Profile Section */}
-      {profileVisible && (
-        <View style={styles.profileSection}>
-          <View style={styles.profileHeader}>
-            <Text style={styles.profileTitle}>Profile</Text>
-            <TouchableOpacity onPress={() => setProfileVisible(false)}>
-              <Ionicons name="close" size={24} color="#fff" />
-            </TouchableOpacity>
-          </View>
-          
-          <View style={styles.profileContent}>
-            <View style={styles.profileAvatar}>
-              <Ionicons name="person" size={60} color="#fff" />
-            </View>
-            
-            <View style={styles.profileDetails}>
-              <View style={styles.profileItem}>
-                <Ionicons name="person" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Name</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.name}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="book" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Course</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.course}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="card" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Roll No.</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.rollNo}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="school" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>College</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.college}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="calendar" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Year</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.year}</Text>
-                </View>
-              </View>
-              
-              <View style={styles.profileItem}>
-                <Ionicons name="people" size={20} color="#4CAF50" />
-                <View style={styles.profileItemInfo}>
-                  <Text style={styles.profileItemLabel}>Section</Text>
-                  <Text style={styles.profileItemValue}>{userProfile.section}</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      )}
+      <ProfileSection 
+        visible={profileVisible}
+        onClose={() => setProfileVisible(false)}
+        userProfile={userProfile}
+        onLogout={handleLogout}
+      />
 
       {/* Overlay */}
       {(sidebarVisible || profileVisible) && (
