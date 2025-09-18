@@ -411,7 +411,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: width * 0.8,
+    width: width * 0.6,
     height: '100%',
     backgroundColor: '#16213e',
     zIndex: 1000,

@@ -16,9 +16,13 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
   const { signIn } = useAuth();
 
   const handleLogin = async () => {
+    // Clear any existing errors
+    setPasswordError('');
+
     if (!email || !password) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
@@ -36,7 +40,21 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
     if (result.success) {
       onLogin();
     } else {
-      Alert.alert('Login Failed', result.error);
+      // Show inline error message for password issues
+      if (result.error.includes('password') || result.error.includes('Password') || 
+          result.error.includes('invalid') || result.error.includes('Invalid')) {
+        setPasswordError('Incorrect password entered');
+      } else {
+        Alert.alert('Login Failed', result.error);
+      }
+    }
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+    // Clear password error when user starts typing
+    if (passwordError) {
+      setPasswordError('');
     }
   };
 
@@ -90,7 +108,7 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
               placeholder="Password"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
               value={password}
-              onChangeText={setPassword}
+              onChangeText={handlePasswordChange}
               secureTextEntry={!showPassword}
             />
             <TouchableOpacity
@@ -104,6 +122,10 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
               />
             </TouchableOpacity>
           </View>
+
+          {passwordError ? (
+            <Text style={styles.errorText}>{passwordError}</Text>
+          ) : null}
 
           <TouchableOpacity style={styles.forgotPasswordButton} onPress={handleForgotPassword}>
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
@@ -245,6 +267,14 @@ const styles = StyleSheet.create({
     color: '#1E3A8A',
     fontSize: 14,
     fontWeight: '500',
+  },
+  errorText: {
+    color: '#F97316',
+    fontSize: 14,
+    fontWeight: '500',
+    marginTop: 8,
+    marginBottom: 8,
+    textAlign: 'left',
   },
   loginButton: {
     backgroundColor: '#1E3A8A',

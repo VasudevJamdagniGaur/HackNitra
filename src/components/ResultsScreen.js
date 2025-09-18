@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: width * 0.8,
+    width: width * 0.6,
     height: '100%',
     backgroundColor: '#0F254D',
     zIndex: 1000,
