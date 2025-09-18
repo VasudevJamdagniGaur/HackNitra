@@ -47,6 +47,11 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
   ];
 
   const getResultsData = (semesterId) => {
+    // Only show data for semesters 1 and 2
+    if (semesterId > 2) {
+      return null;
+    }
+    
     const results = {
       sessional1: { marks: 85, maxMarks: 100, grade: 'A' },
       sessional2: { marks: 78, maxMarks: 100, grade: 'B+' },
@@ -100,57 +105,69 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
         </View>
 
         <ScrollView style={styles.resultsContent}>
-          <View style={styles.resultsGrid}>
-            <View style={styles.resultCard}>
-              <Text style={styles.resultLabel}>Sessional 1</Text>
-              <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional1.grade) }]}>
-                {results.sessional1.marks}/{results.sessional1.maxMarks}
-              </Text>
-              <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional1.grade) }]}>
-                {results.sessional1.grade}
-              </Text>
-            </View>
+          {results ? (
+            <>
+              <View style={styles.resultsGrid}>
+                <View style={styles.resultCard}>
+                  <Text style={styles.resultLabel}>Sessional 1</Text>
+                  <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional1.grade) }]}>
+                    {results.sessional1.marks}/{results.sessional1.maxMarks}
+                  </Text>
+                  <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional1.grade) }]}>
+                    {results.sessional1.grade}
+                  </Text>
+                </View>
 
-            <View style={styles.resultCard}>
-              <Text style={styles.resultLabel}>Sessional 2</Text>
-              <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional2.grade) }]}>
-                {results.sessional2.marks}/{results.sessional2.maxMarks}
-              </Text>
-              <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional2.grade) }]}>
-                {results.sessional2.grade}
-              </Text>
-            </View>
+                <View style={styles.resultCard}>
+                  <Text style={styles.resultLabel}>Sessional 2</Text>
+                  <Text style={[styles.resultMarks, { color: getGradeColor(results.sessional2.grade) }]}>
+                    {results.sessional2.marks}/{results.sessional2.maxMarks}
+                  </Text>
+                  <Text style={[styles.resultGrade, { color: getGradeColor(results.sessional2.grade) }]}>
+                    {results.sessional2.grade}
+                  </Text>
+                </View>
 
-            <View style={styles.resultCard}>
-              <Text style={styles.resultLabel}>External</Text>
-              <Text style={[styles.resultMarks, { color: getGradeColor(results.external.grade) }]}>
-                {results.external.marks}/{results.external.maxMarks}
-              </Text>
-              <Text style={[styles.resultGrade, { color: getGradeColor(results.external.grade) }]}>
-                {results.external.grade}
-              </Text>
-            </View>
+                <View style={styles.resultCard}>
+                  <Text style={styles.resultLabel}>External</Text>
+                  <Text style={[styles.resultMarks, { color: getGradeColor(results.external.grade) }]}>
+                    {results.external.marks}/{results.external.maxMarks}
+                  </Text>
+                  <Text style={[styles.resultGrade, { color: getGradeColor(results.external.grade) }]}>
+                    {results.external.grade}
+                  </Text>
+                </View>
 
-            <View style={styles.resultCard}>
-              <Text style={styles.resultLabel}>Practicals</Text>
-              <Text style={[styles.resultMarks, { color: getGradeColor(results.practicals.grade) }]}>
-                {results.practicals.marks}/{results.practicals.maxMarks}
-              </Text>
-              <Text style={[styles.resultGrade, { color: getGradeColor(results.practicals.grade) }]}>
-                {results.practicals.grade}
-              </Text>
-            </View>
-          </View>
+                <View style={styles.resultCard}>
+                  <Text style={styles.resultLabel}>Practicals</Text>
+                  <Text style={[styles.resultMarks, { color: getGradeColor(results.practicals.grade) }]}>
+                    {results.practicals.marks}/{results.practicals.maxMarks}
+                  </Text>
+                  <Text style={[styles.resultGrade, { color: getGradeColor(results.practicals.grade) }]}>
+                    {results.practicals.grade}
+                  </Text>
+                </View>
+              </View>
 
-          {/* Teacher Remarks Section */}
-          <View style={styles.remarksSection}>
-            <Text style={styles.remarksTitle}>Teacher Remarks</Text>
-            <View style={styles.remarksCard}>
-              <Text style={styles.remarksText}>
-                "Excellent performance throughout the semester. Shows great understanding of concepts and practical applications. Keep up the good work!"
+              {/* Teacher Remarks Section */}
+              <View style={styles.remarksSection}>
+                <Text style={styles.remarksTitle}>Teacher Remarks</Text>
+                <View style={styles.remarksCard}>
+                  <Text style={styles.remarksText}>
+                    "Excellent performance throughout the semester. Shows great understanding of concepts and practical applications. Keep up the good work!"
+                  </Text>
+                </View>
+              </View>
+            </>
+          ) : (
+            <View style={styles.noDataContainer}>
+              <Ionicons name="document-outline" size={64} color="rgba(255, 255, 255, 0.3)" />
+              <Text style={styles.noDataTitle}>No Data Available</Text>
+              <Text style={styles.noDataSubtext}>
+                Results for {selectedSemester.name} are not available yet.
               </Text>
             </View>
-          </View>
+          )}
         </ScrollView>
       </View>
     );
@@ -427,6 +444,26 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'rgba(0,0,0,0.5)',
     zIndex: 999,
+  },
+  noDataContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 80,
+    paddingHorizontal: 20,
+  },
+  noDataTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#E6EEF8',
+    marginTop: 20,
+    textAlign: 'center',
+  },
+  noDataSubtext: {
+    fontSize: 16,
+    color: '#A9C3FF',
+    marginTop: 10,
+    textAlign: 'center',
+    lineHeight: 24,
   },
 });
 
