@@ -109,7 +109,7 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
         
         <TouchableOpacity style={styles.signupButton} onPress={onSignUp}>
           <Text style={styles.signupButtonText}>Contact Institute</Text>
-          <Ionicons name="person-add" size={20} color="#fff" />
+          <Ionicons name="school" size={20} color="#fff" />
         </TouchableOpacity>
       </View>
     </View>
