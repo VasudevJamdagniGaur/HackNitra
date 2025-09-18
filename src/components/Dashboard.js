@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useAuth } from '../contexts/AuthContext';
 
 // Import screen components
 import TrackExamsScreen from './TrackExamsScreen';
@@ -35,6 +36,7 @@ const Dashboard = ({ onLogout }) => {
   const [profileVisible, setProfileVisible] = useState(false);
   const [qrScannerVisible, setQrScannerVisible] = useState(false);
   const [attendanceSubmissionVisible, setAttendanceSubmissionVisible] = useState(false);
+  const { signOut, userProfile: firebaseUserProfile } = useAuth();
   const [scannedAttendanceData, setScannedAttendanceData] = useState(null);
 
   const menuItems = [
@@ -108,10 +110,11 @@ const Dashboard = ({ onLogout }) => {
     setProfileVisible(true);
   };
 
-  const handleLogout = () => {
-    // Close profile and navigate to login
+  const handleLogout = async () => {
+    // Close profile and sign out from Firebase
     setProfileVisible(false);
-    if (onLogout) {
+    const result = await signOut();
+    if (result.success && onLogout) {
       onLogout();
     }
   };
@@ -309,7 +312,7 @@ const Dashboard = ({ onLogout }) => {
       <ProfileSection 
         visible={profileVisible}
         onClose={() => setProfileVisible(false)}
-        userProfile={userProfile}
+        userProfile={firebaseUserProfile || userProfile}
         onLogout={handleLogout}
       />
 

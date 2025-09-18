@@ -9,12 +9,15 @@ import {
   Alert,
   Linking,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as MailComposer from 'expo-mail-composer';
+import { useAuth } from '../contexts/AuthContext';
 
 const StudentSignup = ({ onBack, onComplete }) => {
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     college: '',
@@ -23,7 +26,9 @@ const StudentSignup = ({ onBack, onComplete }) => {
     course: '',
     section: '',
     year: '',
+    password: '',
   });
+  const { signUp } = useAuth();
 
   const courses = ['B.Tech (TT)', 'B.Tech (CSE)', 'B.Tech (AI&ML)'];
   const sections = ['A', 'B', 'C', 'D'];
@@ -61,7 +66,11 @@ const StudentSignup = ({ onBack, onComplete }) => {
         Alert.alert('Error', 'Please select a section');
         return;
       }
-      sendQueryEmail();
+      if (!formData.password || formData.password.length < 6) {
+        Alert.alert('Error', 'Please enter a password with at least 6 characters');
+        return;
+      }
+      handleSignUp();
     }
   };
 
@@ -75,6 +84,27 @@ const StudentSignup = ({ onBack, onComplete }) => {
 
   const updateFormData = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSignUp = async () => {
+    setLoading(true);
+    const result = await signUp(formData.email, formData.password, formData);
+    setLoading(false);
+
+    if (result.success) {
+      Alert.alert(
+        'Registration Successful!',
+        'Your account has been created successfully. You can now login with your credentials.',
+        [
+          {
+            text: 'OK',
+            onPress: () => onComplete()
+          }
+        ]
+      );
+    } else {
+      Alert.alert('Registration Failed', result.error);
+    }
   };
 
   const sendQueryEmail = async () => {
@@ -268,8 +298,8 @@ Thank you for your assistance.`;
 
   const renderStep4 = () => (
     <View style={styles.stepContainer}>
-      <Text style={styles.stepTitle}>Section</Text>
-      <Text style={styles.stepSubtitle}>Select your section</Text>
+      <Text style={styles.stepTitle}>Section & Password</Text>
+      <Text style={styles.stepSubtitle}>Select your section and create a password</Text>
 
       <View style={styles.selectionContainer}>
         <Text style={styles.selectionLabel}>Section</Text>
@@ -292,6 +322,18 @@ Thank you for your assistance.`;
             </TouchableOpacity>
           ))}
         </View>
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.inputLabel}>Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Create a password (min 6 characters)"
+          placeholderTextColor="rgba(255, 255, 255, 0.5)"
+          value={formData.password}
+          onChangeText={(value) => updateFormData('password', value)}
+          secureTextEntry
+        />
       </View>
     </View>
   );
@@ -325,11 +367,21 @@ Thank you for your assistance.`;
 
       {/* Footer */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-          <Text style={styles.nextButtonText}>
-            {step === 4 ? 'Submit Query' : 'Next'}
-          </Text>
-          <Ionicons name="arrow-forward" size={20} color="#fff" />
+        <TouchableOpacity 
+          style={[styles.nextButton, loading && styles.nextButtonDisabled]} 
+          onPress={handleNext}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator size="small" color="#fff" />
+          ) : (
+            <>
+              <Text style={styles.nextButtonText}>
+                {step === 4 ? 'Create Account' : 'Next'}
+              </Text>
+              <Ionicons name="arrow-forward" size={20} color="#fff" />
+            </>
+          )}
         </TouchableOpacity>
       </View>
     </View>
@@ -531,6 +583,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginRight: 12,
+  },
+  nextButtonDisabled: {
+    opacity: 0.6,
   },
 });
 

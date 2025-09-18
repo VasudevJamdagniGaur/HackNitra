@@ -6,26 +6,38 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = ({ onBack, onLogin, onSignUp }) => {
-  const [rollNumber, setRollNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
 
-  const handleLogin = () => {
-    if (!rollNumber || !password) {
+  const handleLogin = async () => {
+    if (!email || !password) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
 
-    if (rollNumber.length < 3) {
-      Alert.alert('Error', 'Please enter a valid roll number');
+    if (!email.includes('@')) {
+      Alert.alert('Error', 'Please enter a valid email address');
       return;
     }
 
-    onLogin();
+    setLoading(true);
+    const result = await signIn(email, password);
+    setLoading(false);
+
+    if (result.success) {
+      onLogin();
+    } else {
+      Alert.alert('Login Failed', result.error);
+    }
   };
 
   const handleForgotPassword = () => {
@@ -59,14 +71,15 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
 
         <View style={styles.formContainer}>
           <View style={styles.inputContainer}>
-            <Ionicons name="card" size={20} color="rgba(255, 255, 255, 0.7)" style={styles.inputIcon} />
+            <Ionicons name="mail" size={20} color="rgba(255, 255, 255, 0.7)" style={styles.inputIcon} />
             <TextInput
               style={styles.input}
-              placeholder="Roll Number"
+              placeholder="Email"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
-              value={rollNumber}
-              onChangeText={setRollNumber}
+              value={email}
+              onChangeText={setEmail}
               autoCapitalize="none"
+              keyboardType="email-address"
             />
           </View>
 
@@ -96,9 +109,19 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-            <Text style={styles.loginButtonText}>Login</Text>
-            <Ionicons name="arrow-forward" size={20} color="#fff" />
+          <TouchableOpacity 
+            style={[styles.loginButton, loading && styles.loginButtonDisabled]} 
+            onPress={handleLogin}
+            disabled={loading}
+          >
+            {loading ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <>
+                <Text style={styles.loginButtonText}>Login</Text>
+                <Ionicons name="arrow-forward" size={20} color="#fff" />
+              </>
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -247,6 +270,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginRight: 12,
+  },
+  loginButtonDisabled: {
+    opacity: 0.6,
   },
   footer: {
     paddingBottom: 30,
