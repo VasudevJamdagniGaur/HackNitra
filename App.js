@@ -4,7 +4,6 @@ import { StatusBar } from 'expo-status-bar';
 
 // Import components
 import SplashScreen from './src/components/SplashScreen';
-import RoleSelection from './src/components/RoleSelection';
 import StudentSignup from './src/components/StudentSignup';
 import Login from './src/components/Login';
 import Dashboard from './src/components/Dashboard';
@@ -13,11 +12,6 @@ const App = () => {
   const [currentState, setCurrentState] = useState('splash');
 
   const handleSplashComplete = () => {
-    setCurrentState('roleSelection');
-  };
-
-  const handleRoleSelect = (role) => {
-    // Both students and teachers go to login page
     setCurrentState('login');
   };
 
@@ -30,7 +24,7 @@ const App = () => {
   };
 
   const handleBack = () => {
-    setCurrentState('roleSelection');
+    setCurrentState('login');
   };
 
   const handleSignUp = () => {
@@ -42,9 +36,6 @@ const App = () => {
       <StatusBar style="auto" />
       {currentState === 'splash' && (
         <SplashScreen onAnimationComplete={handleSplashComplete} />
-      )}
-      {currentState === 'roleSelection' && (
-        <RoleSelection onRoleSelect={handleRoleSelect} />
       )}
       {currentState === 'studentSignup' && (
         <StudentSignup onBack={handleBack} onComplete={handleSignupComplete} />
