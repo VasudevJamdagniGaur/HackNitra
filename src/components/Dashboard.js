@@ -92,6 +92,8 @@ const Dashboard = () => {
   };
 
   const handleProfilePress = () => {
+    console.log('Profile button pressed!');
+    Alert.alert('Profile', 'Profile button clicked!');
     setProfileVisible(true);
   };
 
@@ -154,7 +156,11 @@ const Dashboard = () => {
           <Text style={styles.title}>Edutrack</Text>
         </View>
         
-        <TouchableOpacity style={styles.profileButton} onPress={handleProfilePress}>
+        <TouchableOpacity 
+          style={styles.profileButton} 
+          onPress={handleProfilePress}
+          activeOpacity={0.7}
+        >
           <View style={styles.profileContainer}>
             <View style={styles.profileIcon}>
               <Ionicons name="person" size={20} color="#fff" />
@@ -197,11 +203,12 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <ScrollView style={styles.content}>
-        {/* Welcome Section */}
-        <View style={styles.welcomeSection}>
-          <Text style={styles.welcomeTitle}>Welcome back!</Text>
-          <Text style={styles.welcomeSubtitle}>Here's what's happening today</Text>
-        </View>
+                {/* Welcome Section */}
+                <View style={styles.welcomeSection}>
+                  <Text style={styles.welcomeTitle}>Welcome back!</Text>
+                  <Text style={styles.welcomeSubtitle}>Here's what's happening today</Text>
+                  <Text style={styles.debugText}>Profile Visible: {profileVisible ? 'YES' : 'NO'}</Text>
+                </View>
 
         {/* Notice Board */}
         <View style={styles.section}>
@@ -326,6 +333,9 @@ const Dashboard = () => {
           </View>
         </View>
       )}
+
+      {/* Debug Info */}
+      {profileVisible && console.log('Profile section is rendering')}
 
       {/* Overlay */}
       {(sidebarVisible || profileVisible) && (
@@ -470,6 +480,11 @@ const styles = StyleSheet.create({
   welcomeSubtitle: {
     fontSize: 16,
     color: 'rgba(255, 255, 255, 0.7)',
+  },
+  debugText: {
+    fontSize: 14,
+    color: '#4CAF50',
+    marginTop: 10,
   },
   section: {
     marginBottom: 25,
