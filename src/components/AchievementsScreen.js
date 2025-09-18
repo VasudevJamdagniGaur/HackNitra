@@ -194,7 +194,7 @@ const AchievementsScreen = ({ onBack, onMenuPress }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   header: {
     flexDirection: 'row',
@@ -203,6 +203,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
+    backgroundColor: '#0F254D',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   menuButton: {
     padding: 10,
@@ -210,7 +218,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   placeholder: {
     width: 44,
@@ -219,9 +227,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 20,
     marginBottom: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 10,
     padding: 4,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   tab: {
     flex: 1,
@@ -232,16 +242,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   activeTab: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#FACC15',
   },
   tabText: {
     fontSize: 14,
     fontWeight: '500',
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
     marginLeft: 8,
   },
   activeTabText: {
-    color: '#fff',
+    color: '#0F254D',
   },
   content: {
     flex: 1,
@@ -251,11 +261,16 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   achievementCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   achievementHeader: {
     flexDirection: 'row',
@@ -276,12 +291,12 @@ const styles = StyleSheet.create({
   achievementTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
     marginBottom: 5,
   },
   achievementDate: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
   },
   categoryBadge: {
     paddingHorizontal: 12,
@@ -295,7 +310,7 @@ const styles = StyleSheet.create({
   },
   achievementDescription: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
     lineHeight: 20,
     marginBottom: 15,
   },
@@ -324,13 +339,13 @@ const styles = StyleSheet.create({
   noAchievementsText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#fff',
+    color: '#E6EEF8',
     marginTop: 20,
     marginBottom: 10,
   },
   noAchievementsSubtext: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
     textAlign: 'center',
   },
   sidebar: {
@@ -339,10 +354,10 @@ const styles = StyleSheet.create({
     left: 0,
     width: width * 0.8,
     height: '100%',
-    backgroundColor: '#16213e',
+    backgroundColor: '#0F254D',
     zIndex: 1000,
     borderRightWidth: 1,
-    borderRightColor: 'rgba(255, 255, 255, 0.1)',
+    borderRightColor: 'rgba(255,255,255,0.06)',
   },
   sidebarHeader: {
     flexDirection: 'row',
@@ -351,12 +366,12 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 60,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   sidebarTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   menuList: {
     flex: 1,
@@ -368,7 +383,7 @@ const styles = StyleSheet.create({
     padding: 15,
     paddingLeft: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   menuIcon: {
     width: 40,
@@ -380,7 +395,7 @@ const styles = StyleSheet.create({
   },
   menuItemText: {
     fontSize: 16,
-    color: '#fff',
+    color: '#E6EEF8',
   },
   overlay: {
     position: 'absolute',

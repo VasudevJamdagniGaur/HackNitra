@@ -41,18 +41,18 @@ const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
       <View style={styles.profileHeader}>
         <Text style={styles.profileTitle}>Profile</Text>
         <TouchableOpacity onPress={onClose}>
-          <Ionicons name="close" size={24} color="#fff" />
+          <Ionicons name="close" size={24} color="#E6EEF8" />
         </TouchableOpacity>
       </View>
       
       <View style={styles.profileContent}>
         <View style={styles.profileAvatar}>
-          <Ionicons name="person" size={70} color="#fff" />
+          <Ionicons name="person" size={70} color="#E6EEF8" />
         </View>
         
         <View style={styles.profileDetails}>
           <View style={styles.profileItem}>
-            <Ionicons name="person" size={20} color="#4CAF50" />
+            <Ionicons name="person" size={20} color="#FACC15" />
             <View style={styles.profileItemInfo}>
               <Text style={styles.profileItemLabel}>Name</Text>
               <Text style={styles.profileItemValue}>{userProfile.name}</Text>
@@ -60,7 +60,7 @@ const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
           </View>
           
           <View style={styles.profileItem}>
-            <Ionicons name="book" size={20} color="#4CAF50" />
+            <Ionicons name="book" size={20} color="#FACC15" />
             <View style={styles.profileItemInfo}>
               <Text style={styles.profileItemLabel}>Course</Text>
               <Text style={styles.profileItemValue}>{userProfile.course}</Text>
@@ -68,7 +68,7 @@ const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
           </View>
           
           <View style={styles.profileItem}>
-            <Ionicons name="card" size={20} color="#4CAF50" />
+            <Ionicons name="card" size={20} color="#FACC15" />
             <View style={styles.profileItemInfo}>
               <Text style={styles.profileItemLabel}>Roll No.</Text>
               <Text style={styles.profileItemValue}>{userProfile.rollNo}</Text>
@@ -76,7 +76,7 @@ const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
           </View>
           
           <View style={styles.profileItem}>
-            <Ionicons name="school" size={20} color="#4CAF50" />
+            <Ionicons name="school" size={20} color="#FACC15" />
             <View style={styles.profileItemInfo}>
               <Text style={styles.profileItemLabel}>College</Text>
               <Text style={styles.profileItemValue}>{userProfile.college}</Text>
@@ -84,7 +84,7 @@ const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
           </View>
           
           <View style={styles.profileItem}>
-            <Ionicons name="calendar" size={20} color="#4CAF50" />
+            <Ionicons name="calendar" size={20} color="#FACC15" />
             <View style={styles.profileItemInfo}>
               <Text style={styles.profileItemLabel}>Year</Text>
               <Text style={styles.profileItemValue}>{userProfile.year}</Text>
@@ -92,7 +92,7 @@ const ProfileSection = ({ visible, onClose, userProfile, onLogout }) => {
           </View>
           
           <View style={styles.profileItem}>
-            <Ionicons name="people" size={20} color="#4CAF50" />
+            <Ionicons name="people" size={20} color="#FACC15" />
             <View style={styles.profileItemInfo}>
               <Text style={styles.profileItemLabel}>Section</Text>
               <Text style={styles.profileItemValue}>{userProfile.section}</Text>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
     zIndex: 1000,
   },
   profileHeader: {
@@ -132,13 +132,18 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingBottom: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    backgroundColor: '#0F254D',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   profileTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   profileContent: {
     flex: 1,
@@ -149,14 +154,14 @@ const styles = StyleSheet.create({
     width: 140,
     height: 140,
     borderRadius: 70,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
     marginBottom: 40,
     borderWidth: 4,
-    borderColor: '#4CAF50',
-    shadowColor: '#4CAF50',
+    borderColor: '#FACC15',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -171,17 +176,17 @@ const styles = StyleSheet.create({
   profileItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 16,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 3,
   },
@@ -191,33 +196,33 @@ const styles = StyleSheet.create({
   },
   profileItemLabel: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
     marginBottom: 5,
   },
   profileItemValue: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   logoutContainer: {
     marginTop: 30,
     paddingTop: 20,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(255, 255, 255, 0.1)',
+    borderTopColor: 'rgba(255,255,255,0.06)',
   },
   logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F44336',
+    backgroundColor: '#F97316',
     borderRadius: 16,
     paddingVertical: 16,
     paddingHorizontal: 32,
     borderWidth: 1,
-    borderColor: '#F44336',
+    borderColor: '#F97316',
     maxWidth: 200,
     alignSelf: 'center',
-    shadowColor: '#F44336',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -229,7 +234,7 @@ const styles = StyleSheet.create({
   logoutText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
     marginLeft: 12,
   },
 });

@@ -62,7 +62,7 @@ const AttendanceSubmission = ({ attendanceData, onBack, onSubmit }) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Scanned QR Code</Text>
           <View style={styles.qrContainer}>
-            <Ionicons name="qr-code" size={40} color="#4CAF50" />
+            <Ionicons name="qr-code" size={40} color="#FACC15" />
             <Text style={styles.qrCode}>{attendanceData.qrCode}</Text>
           </View>
         </View>
@@ -72,7 +72,7 @@ const AttendanceSubmission = ({ attendanceData, onBack, onSubmit }) => {
           <Text style={styles.sectionTitle}>Device Information</Text>
           <View style={styles.infoCard}>
             <View style={styles.infoRow}>
-              <Ionicons name="phone-portrait" size={20} color="#4CAF50" />
+              <Ionicons name="phone-portrait" size={20} color="#FACC15" />
               <Text style={styles.infoLabel}>IMEI Number:</Text>
               <Text style={styles.infoValue}>{attendanceData.imei}</Text>
             </View>
@@ -84,12 +84,12 @@ const AttendanceSubmission = ({ attendanceData, onBack, onSubmit }) => {
           <Text style={styles.sectionTitle}>Location Information</Text>
           <View style={styles.infoCard}>
             <View style={styles.infoRow}>
-              <Ionicons name="location" size={20} color="#4CAF50" />
+              <Ionicons name="location" size={20} color="#FACC15" />
               <Text style={styles.infoLabel}>Latitude:</Text>
               <Text style={styles.infoValue}>{attendanceData.location.latitude.toFixed(6)}</Text>
             </View>
             <View style={styles.infoRow}>
-              <Ionicons name="location" size={20} color="#4CAF50" />
+              <Ionicons name="location" size={20} color="#FACC15" />
               <Text style={styles.infoLabel}>Longitude:</Text>
               <Text style={styles.infoValue}>{attendanceData.location.longitude.toFixed(6)}</Text>
             </View>
@@ -101,7 +101,7 @@ const AttendanceSubmission = ({ attendanceData, onBack, onSubmit }) => {
           <Text style={styles.sectionTitle}>Submission Details</Text>
           <View style={styles.infoCard}>
             <View style={styles.infoRow}>
-              <Ionicons name="time" size={20} color="#4CAF50" />
+              <Ionicons name="time" size={20} color="#FACC15" />
               <Text style={styles.infoLabel}>Timestamp:</Text>
               <Text style={styles.infoValue}>{formatTimestamp(attendanceData.timestamp)}</Text>
             </View>
@@ -110,7 +110,7 @@ const AttendanceSubmission = ({ attendanceData, onBack, onSubmit }) => {
 
         {/* Warning */}
         <View style={styles.warningContainer}>
-          <Ionicons name="warning" size={20} color="#FF9800" />
+          <Ionicons name="warning" size={20} color="#F97316" />
           <Text style={styles.warningText}>
             Please verify all information before submitting. This action cannot be undone.
           </Text>
@@ -144,7 +144,7 @@ const AttendanceSubmission = ({ attendanceData, onBack, onSubmit }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   header: {
     flexDirection: 'row',
@@ -153,7 +153,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backgroundColor: '#0F254D',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   backButton: {
     padding: 10,
@@ -161,7 +168,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   placeholder: {
     width: 44,
@@ -176,30 +183,40 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
     marginBottom: 15,
   },
   qrContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 20,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(76, 175, 80, 0.3)',
+    borderColor: 'rgba(250, 204, 21, 0.3)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   qrCode: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#4CAF50',
+    color: '#FACC15',
     marginTop: 10,
     textAlign: 'center',
   },
   infoCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   infoRow: {
     flexDirection: 'row',
@@ -208,40 +225,42 @@ const styles = StyleSheet.create({
   },
   infoLabel: {
     fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: '#A9C3FF',
     marginLeft: 10,
     flex: 1,
   },
   infoValue: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
     flex: 2,
     textAlign: 'right',
   },
   warningContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 152, 0, 0.1)',
+    backgroundColor: 'rgba(249, 115, 22, 0.1)',
     borderRadius: 10,
     padding: 15,
     borderWidth: 1,
-    borderColor: 'rgba(255, 152, 0, 0.3)',
+    borderColor: 'rgba(249, 115, 22, 0.3)',
     marginBottom: 20,
   },
   warningText: {
     fontSize: 14,
-    color: '#FF9800',
+    color: '#F97316',
     marginLeft: 10,
     flex: 1,
     lineHeight: 20,
   },
   footer: {
     padding: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backgroundColor: '#0F254D',
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(255,255,255,0.06)',
   },
   submitButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#1E3A8A',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -250,7 +269,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     maxWidth: 280,
     alignSelf: 'center',
-    shadowColor: '#4CAF50',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -260,11 +279,11 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   submitButtonDisabled: {
-    backgroundColor: 'rgba(76, 175, 80, 0.5)',
+    backgroundColor: 'rgba(30, 58, 138, 0.5)',
     shadowOpacity: 0.1,
   },
   submitButtonText: {
-    color: '#fff',
+    color: '#E6EEF8',
     fontSize: 16,
     fontWeight: 'bold',
     marginRight: 12,

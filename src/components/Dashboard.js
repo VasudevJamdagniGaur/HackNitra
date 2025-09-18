@@ -241,21 +241,24 @@ const Dashboard = ({ onLogout }) => {
         {/* Notice Board */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Notice Board</Text>
-          <View style={styles.noticeContainer}>
-            {notices.map((notice) => (
-              <View key={notice.id} style={styles.noticeItem}>
-                <View style={styles.noticeHeader}>
-                  <Text style={styles.noticeTitle}>{notice.title}</Text>
-                  <View
-                    style={[
-                      styles.priorityDot,
-                      { backgroundColor: getPriorityColor(notice.priority) },
-                    ]}
-                  />
+          <View style={styles.noticeBoardContainer}>
+            <Text style={styles.noticeBoardHeading}>Important Notices</Text>
+            <View style={styles.noticePointsContainer}>
+              {notices.map((notice) => (
+                <View key={notice.id} style={styles.noticePoint}>
+                  <View style={styles.noticePointHeader}>
+                    <View
+                      style={[
+                        styles.priorityIndicator,
+                        { backgroundColor: getPriorityColor(notice.priority) },
+                      ]}
+                    />
+                    <Text style={styles.noticePointTitle}>{notice.title}</Text>
+                  </View>
+                  <Text style={styles.noticePointDate}>{notice.date}</Text>
                 </View>
-                <Text style={styles.noticeDate}>{notice.date}</Text>
-              </View>
-            ))}
+              ))}
+            </View>
           </View>
         </View>
 
@@ -319,23 +322,28 @@ const Dashboard = ({ onLogout }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   topBar: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F254D',
     paddingHorizontal: 20,
     paddingVertical: 15,
     paddingTop: 50,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   menuButton: {
     padding: 8,
     borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255,255,255,0.06)',
   },
   titleContainer: {
     flexDirection: 'row',
@@ -397,10 +405,10 @@ const styles = StyleSheet.create({
     left: 0,
     width: width * 0.8,
     height: '100%',
-    backgroundColor: '#16213e',
+    backgroundColor: '#0F254D',
     zIndex: 1000,
     borderRightWidth: 1,
-    borderRightColor: 'rgba(255, 255, 255, 0.1)',
+    borderRightColor: 'rgba(255,255,255,0.06)',
   },
   sidebarHeader: {
     flexDirection: 'row',
@@ -426,7 +434,7 @@ const styles = StyleSheet.create({
     padding: 15,
     paddingLeft: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   menuIcon: {
     width: 40,
@@ -463,57 +471,83 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
     marginBottom: 15,
   },
-  noticeContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 15,
-    padding: 20,
+  noticeBoardContainer: {
+    backgroundColor: '#0F1724',
+    borderRadius: 20,
+    padding: 25,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
+    aspectRatio: 1,
+    maxWidth: 350,
+    alignSelf: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 8,
+    elevation: 8,
   },
-  noticeItem: {
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+  noticeBoardHeading: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#E6EEF8',
+    textAlign: 'center',
+    marginBottom: 25,
+    borderBottomWidth: 2,
+    borderBottomColor: '#1E3A8A',
+    paddingBottom: 15,
   },
-  noticeHeader: {
+  noticePointsContainer: {
+    flex: 1,
+    justifyContent: 'space-around',
+  },
+  noticePoint: {
+    marginBottom: 18,
+    paddingVertical: 10,
+  },
+  noticePointHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: 8,
   },
-  noticeTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#fff',
+  priorityIndicator: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    marginRight: 15,
+  },
+  noticePointTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#E6EEF8',
     flex: 1,
+    lineHeight: 22,
   },
-  priorityDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginLeft: 10,
-  },
-  noticeDate: {
-    fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.6)',
+  noticePointDate: {
+    fontSize: 13,
+    color: '#A9C3FF',
+    fontStyle: 'italic',
+    marginLeft: 27,
   },
   attendanceButton: {
-    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+    backgroundColor: '#1E3A8A',
     borderRadius: 16,
     padding: 20,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(76, 175, 80, 0.3)',
-    shadowColor: '#4CAF50',
+    borderColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 4,
   },
@@ -521,7 +555,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#FACC15',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 15,
@@ -537,31 +571,36 @@ const styles = StyleSheet.create({
   },
   attendanceSubtitle: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
   },
   statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   statCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 20,
     alignItems: 'center',
     flex: 1,
     marginHorizontal: 5,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   statNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#4CAF50',
+    color: '#FACC15',
     marginBottom: 5,
   },
   statLabel: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
     textAlign: 'center',
   },
   overlay: {

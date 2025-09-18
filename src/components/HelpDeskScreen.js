@@ -213,7 +213,7 @@ const HelpDeskScreen = ({ onBack, onMenuPress }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   header: {
     flexDirection: 'row',
@@ -222,6 +222,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
+    backgroundColor: '#0F254D',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   menuButton: {
     padding: 10,
@@ -263,7 +271,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   inputContainer: {
     marginBottom: 20,
@@ -271,29 +279,29 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#fff',
+    color: '#E6EEF8',
     marginBottom: 12,
   },
   textInput: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 16,
     padding: 20,
     fontSize: 16,
-    color: '#fff',
+    color: '#E6EEF8',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderColor: 'rgba(255,255,255,0.06)',
     minHeight: 120,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 3,
   },
   submitButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#1E3A8A',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -314,7 +322,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   emailText: {
-    color: '#4CAF50',
+    color: '#1E3A8A',
     fontSize: 14,
     marginLeft: 8,
   },
@@ -324,10 +332,10 @@ const styles = StyleSheet.create({
     left: 0,
     width: width * 0.8,
     height: '100%',
-    backgroundColor: '#16213e',
+    backgroundColor: '#0F254D',
     zIndex: 1000,
     borderRightWidth: 1,
-    borderRightColor: 'rgba(255, 255, 255, 0.1)',
+    borderRightColor: 'rgba(255,255,255,0.06)',
   },
   sidebarHeader: {
     flexDirection: 'row',

@@ -301,7 +301,7 @@ const NotesScreen = ({ onBack, onMenuPress }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   header: {
     flexDirection: 'row',
@@ -310,6 +310,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
+    backgroundColor: '#0F254D',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   backButton: {
     padding: 10,
@@ -343,16 +351,16 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   selectedSubjectButton: {
-    backgroundColor: '#4CAF50',
-    borderColor: '#4CAF50',
+    backgroundColor: '#FACC15',
+    borderColor: '#0F254D',
   },
   subjectButtonText: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
     marginLeft: 8,
   },
   selectedSubjectButtonText: {
-    color: '#fff',
+    color: '#0F254D',
   },
   content: {
     flex: 1,
@@ -362,11 +370,16 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   noteCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   noteHeader: {
     flexDirection: 'row',
@@ -382,22 +395,22 @@ const styles = StyleSheet.create({
   noteTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
     marginBottom: 4,
   },
   noteSubjectCode: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#4CAF50',
+    color: '#1E3A8A',
     marginBottom: 2,
   },
   noteSubjectName: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
   },
   downloadButton: {
     padding: 8,
-    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+    backgroundColor: '#FACC15',
     borderRadius: 8,
   },
   noteDetails: {
@@ -411,7 +424,7 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.6)',
+    color: '#A9C3FF',
     marginLeft: 4,
   },
   sidebar: {
@@ -420,10 +433,10 @@ const styles = StyleSheet.create({
     left: 0,
     width: width * 0.8,
     height: '100%',
-    backgroundColor: '#16213e',
+    backgroundColor: '#0F254D',
     zIndex: 1000,
     borderRightWidth: 1,
-    borderRightColor: 'rgba(255, 255, 255, 0.1)',
+    borderRightColor: 'rgba(255,255,255,0.06)',
   },
   sidebarHeader: {
     flexDirection: 'row',

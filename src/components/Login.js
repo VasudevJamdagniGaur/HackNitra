@@ -119,7 +119,7 @@ const Login = ({ onBack, onLogin, onSignUp }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   header: {
     flexDirection: 'row',
@@ -128,6 +128,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
+    backgroundColor: '#0F254D',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   backButton: {
     padding: 10,
@@ -178,19 +186,19 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 16,
     marginBottom: 20,
     paddingHorizontal: 20,
     paddingVertical: 4,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderColor: 'rgba(255,255,255,0.06)',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 3,
   },
@@ -201,7 +209,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 16,
     fontSize: 16,
-    color: '#fff',
+    color: '#E6EEF8',
   },
   eyeButton: {
     padding: 5,
@@ -211,12 +219,12 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   forgotPasswordText: {
-    color: '#4CAF50',
+    color: '#1E3A8A',
     fontSize: 14,
     fontWeight: '500',
   },
   loginButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#1E3A8A',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -225,7 +233,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     maxWidth: 280,
     alignSelf: 'center',
-    shadowColor: '#4CAF50',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -252,7 +260,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   signupButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#FACC15',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -261,7 +269,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     maxWidth: 280,
     alignSelf: 'center',
-    shadowColor: '#4CAF50',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -271,7 +279,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   signupButtonText: {
-    color: '#fff',
+    color: '#0F254D',
     fontSize: 16,
     fontWeight: 'bold',
     marginRight: 12,

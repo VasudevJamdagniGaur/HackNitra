@@ -153,7 +153,7 @@ const FacultyScreen = ({ onBack, onMenuPress }) => {
           style={styles.contactButton}
           onPress={() => handleContactPress(faculty)}
         >
-          <Ionicons name="mail" size={20} color="#4CAF50" />
+          <Ionicons name="mail" size={20} color="#FACC15" />
         </TouchableOpacity>
       </View>
       
@@ -162,11 +162,11 @@ const FacultyScreen = ({ onBack, onMenuPress }) => {
       
       <View style={styles.facultyDetails}>
         <View style={styles.detailItem}>
-          <Ionicons name="business" size={16} color="rgba(255, 255, 255, 0.7)" />
+          <Ionicons name="business" size={16} color="#A9C3FF" />
           <Text style={styles.detailText}>{faculty.department}</Text>
         </View>
         <View style={styles.detailItem}>
-          <Ionicons name="mail" size={16} color="rgba(255, 255, 255, 0.7)" />
+          <Ionicons name="mail" size={16} color="#A9C3FF" />
           <Text style={styles.detailText}>{faculty.email}</Text>
         </View>
       </View>
@@ -235,7 +235,7 @@ const FacultyScreen = ({ onBack, onMenuPress }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   header: {
     flexDirection: 'row',
@@ -244,6 +244,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
+    backgroundColor: '#0F254D',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   menuButton: {
     padding: 10,
@@ -251,7 +259,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   placeholder: {
     width: 44,
@@ -264,11 +272,16 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   facultyCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   facultyHeader: {
     flexDirection: 'row',
@@ -277,7 +290,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   subjectCodeContainer: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#1E3A8A',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 8,
@@ -285,13 +298,13 @@ const styles = StyleSheet.create({
   subjectCode: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   contactButton: {
     padding: 12,
-    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+    backgroundColor: 'rgba(250, 204, 21, 0.2)',
     borderRadius: 12,
-    shadowColor: '#4CAF50',
+    shadowColor: '#FACC15',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -303,12 +316,12 @@ const styles = StyleSheet.create({
   subjectName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
     marginBottom: 8,
   },
   teacherName: {
     fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: '#A9C3FF',
     marginBottom: 15,
   },
   facultyDetails: {
@@ -320,7 +333,7 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
     marginLeft: 8,
     flex: 1,
   },
@@ -330,10 +343,10 @@ const styles = StyleSheet.create({
     left: 0,
     width: width * 0.8,
     height: '100%',
-    backgroundColor: '#16213e',
+    backgroundColor: '#0F254D',
     zIndex: 1000,
     borderRightWidth: 1,
-    borderRightColor: 'rgba(255, 255, 255, 0.1)',
+    borderRightColor: 'rgba(255,255,255,0.06)',
   },
   sidebarHeader: {
     flexDirection: 'row',
@@ -342,12 +355,12 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 60,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   sidebarTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   menuList: {
     flex: 1,
@@ -359,7 +372,7 @@ const styles = StyleSheet.create({
     padding: 15,
     paddingLeft: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   menuIcon: {
     width: 40,
@@ -371,7 +384,7 @@ const styles = StyleSheet.create({
   },
   menuItemText: {
     fontSize: 16,
-    color: '#fff',
+    color: '#E6EEF8',
   },
   overlay: {
     position: 'absolute',

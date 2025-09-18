@@ -91,7 +91,7 @@ const QRScanner = ({ onBack, onQRScanned }) => {
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#4CAF50" />
+        <ActivityIndicator size="large" color="#FACC15" />
         <Text style={styles.loadingText}>Setting up camera...</Text>
       </View>
     );
@@ -164,7 +164,7 @@ const QRScanner = ({ onBack, onQRScanned }) => {
 
       {isLoading && (
         <View style={styles.processingOverlay}>
-          <ActivityIndicator size="large" color="#4CAF50" />
+          <ActivityIndicator size="large" color="#FACC15" />
           <Text style={styles.processingText}>Processing QR code...</Text>
         </View>
       )}
@@ -175,16 +175,16 @@ const QRScanner = ({ onBack, onQRScanned }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   loadingContainer: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
     justifyContent: 'center',
     alignItems: 'center',
   },
   loadingText: {
-    color: '#fff',
+    color: '#E6EEF8',
     fontSize: 16,
     marginTop: 20,
   },
@@ -195,7 +195,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: '#0F254D',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   backButton: {
     padding: 10,
@@ -203,7 +210,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   placeholder: {
     width: 44,
@@ -233,7 +240,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 30,
     height: 30,
-    borderColor: '#4CAF50',
+    borderColor: '#FACC15',
     borderWidth: 3,
   },
   topLeft: {
@@ -269,10 +276,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   instructionText: {
-    color: '#fff',
+    color: '#E6EEF8',
     fontSize: 16,
     textAlign: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: 'rgba(15, 37, 77, 0.9)',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
@@ -286,25 +293,25 @@ const styles = StyleSheet.create({
   errorTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#F44336',
+    color: '#F97316',
     marginTop: 20,
     marginBottom: 10,
   },
   errorText: {
     fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: '#A9C3FF',
     textAlign: 'center',
     lineHeight: 24,
     marginBottom: 30,
   },
   retryButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#1E3A8A',
     paddingHorizontal: 32,
     paddingVertical: 16,
     borderRadius: 16,
     maxWidth: 200,
     alignSelf: 'center',
-    shadowColor: '#4CAF50',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -314,7 +321,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   retryButtonText: {
-    color: '#fff',
+    color: '#E6EEF8',
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -329,7 +336,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   processingText: {
-    color: '#fff',
+    color: '#E6EEF8',
     fontSize: 16,
     marginTop: 20,
   },

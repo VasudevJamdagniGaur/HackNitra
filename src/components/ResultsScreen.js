@@ -223,7 +223,7 @@ const ResultsScreen = ({ onBack, onMenuPress }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   header: {
     flexDirection: 'row',
@@ -232,6 +232,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
+    backgroundColor: '#0F254D',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   menuButton: {
     padding: 10,
@@ -251,18 +259,23 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
     marginBottom: 20,
   },
   semestersContainer: {
     gap: 15,
   },
   semesterCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   semesterHeader: {
     flexDirection: 'row',
@@ -273,15 +286,15 @@ const styles = StyleSheet.create({
   semesterName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   semesterSubjects: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
   },
   resultsDetailContainer: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   resultsHeader: {
     flexDirection: 'row',
@@ -297,7 +310,7 @@ const styles = StyleSheet.create({
   resultsTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   resultsContent: {
     flex: 1,
@@ -321,17 +334,19 @@ const styles = StyleSheet.create({
   },
   resultLabel: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
     marginBottom: 10,
   },
   resultMarks: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#FACC15',
     marginBottom: 5,
   },
   resultGrade: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#E6EEF8',
   },
   remarksSection: {
     marginBottom: 30,
@@ -339,19 +354,19 @@ const styles = StyleSheet.create({
   remarksTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
     marginBottom: 15,
   },
   remarksCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   remarksText: {
     fontSize: 16,
-    color: '#fff',
+    color: '#A9C3FF',
     lineHeight: 24,
     fontStyle: 'italic',
   },
@@ -361,10 +376,10 @@ const styles = StyleSheet.create({
     left: 0,
     width: width * 0.8,
     height: '100%',
-    backgroundColor: '#16213e',
+    backgroundColor: '#0F254D',
     zIndex: 1000,
     borderRightWidth: 1,
-    borderRightColor: 'rgba(255, 255, 255, 0.1)',
+    borderRightColor: 'rgba(255,255,255,0.06)',
   },
   sidebarHeader: {
     flexDirection: 'row',
@@ -373,12 +388,12 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 60,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   sidebarTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#E6EEF8',
   },
   menuList: {
     flex: 1,

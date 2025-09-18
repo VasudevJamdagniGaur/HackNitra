@@ -271,7 +271,7 @@ const AttendanceScreen = ({ onBack, onMenuPress, onLogout }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
   },
   header: {
     flexDirection: 'row',
@@ -280,6 +280,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
+    backgroundColor: '#0F254D',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   backButton: {
     padding: 10,
@@ -336,7 +344,7 @@ const styles = StyleSheet.create({
     height: 160,
     borderRadius: 80,
     borderWidth: 16,
-    borderColor: '#F44336',
+    borderColor: '#A9C3FF',
   },
   donutPresent: {
     position: 'absolute',
@@ -345,14 +353,14 @@ const styles = StyleSheet.create({
     borderRadius: 80,
     borderWidth: 16,
     borderColor: 'transparent',
-    borderTopColor: '#4CAF50',
+    borderTopColor: '#1E3A8A',
     transform: [{ rotate: '-90deg' }],
   },
   donutInner: {
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: '#0B0F1A',
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 1,
@@ -360,16 +368,22 @@ const styles = StyleSheet.create({
   chartText: {
     fontSize: 28,
     fontWeight: 'bold',
+    color: '#E6EEF8',
   },
   subjectsContainer: {
     gap: 15,
   },
   subjectCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 15,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   subjectHeader: {
     flexDirection: 'row',
@@ -380,36 +394,43 @@ const styles = StyleSheet.create({
   subjectName: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#fff',
+    color: '#E6EEF8',
     flex: 1,
   },
   subjectPercentage: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#FACC15',
   },
   subjectStats: {
     gap: 8,
   },
   subjectStatsText: {
     fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#A9C3FF',
   },
   progressBar: {
     height: 6,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(255,255,255,0.06)',
     borderRadius: 3,
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
     borderRadius: 3,
+    backgroundColor: '#1E3A8A',
   },
   recentContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#0F1724',
     borderRadius: 15,
     padding: 15,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255,255,255,0.06)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   recentItem: {
     flexDirection: 'row',
@@ -425,12 +446,12 @@ const styles = StyleSheet.create({
   recentSubject: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#fff',
+    color: '#E6EEF8',
     marginBottom: 2,
   },
   recentDate: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.6)',
+    color: '#A9C3FF',
   },
   statusBadge: {
     paddingHorizontal: 12,
@@ -440,7 +461,7 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#0F254D',
   },
   menuButton: {
     padding: 10,
@@ -451,10 +472,10 @@ const styles = StyleSheet.create({
     left: 0,
     width: width * 0.8,
     height: '100%',
-    backgroundColor: '#16213e',
+    backgroundColor: '#0F254D',
     zIndex: 1000,
     borderRightWidth: 1,
-    borderRightColor: 'rgba(255, 255, 255, 0.1)',
+    borderRightColor: 'rgba(255,255,255,0.06)',
   },
   sidebarHeader: {
     flexDirection: 'row',
