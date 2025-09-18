@@ -95,20 +95,16 @@ Please update my details in the database so I can access the college app properl
 Thank you for your assistance.`;
 
       if (Platform.OS === 'web') {
-        // Use mailto link for web
+        // Use mailto link for web - open in background and return to login immediately
         const mailtoLink = `mailto:coolbuddyvasudev@gmail.com?subject=Student Database Update Request&body=${encodeURIComponent(emailBody)}`;
-        await Linking.openURL(mailtoLink);
         
-        Alert.alert(
-          'Query Submitted',
-          'Your email client has opened with the query. Please send the email to complete the process.',
-          [
-            {
-              text: 'OK',
-              onPress: () => onComplete()
-            }
-          ]
-        );
+        // Open Gmail in background without waiting
+        Linking.openURL(mailtoLink).catch(err => {
+          console.error('Error opening email client:', err);
+        });
+        
+        // Return to login immediately
+        onComplete();
       } else {
         // Use MailComposer for mobile
         const isAvailable = await MailComposer.isAvailableAsync();

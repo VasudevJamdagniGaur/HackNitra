@@ -16,7 +16,7 @@ const App = () => {
   };
 
   const handleSignupComplete = () => {
-    setCurrentState('dashboard');
+    setCurrentState('login');
   };
 
   const handleLogin = () => {
